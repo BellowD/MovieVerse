@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieVerse - Search & Movie</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header id="main-header">
+        <nav class="nav-menu">
+            <div class="logo">MovieVerse</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Main Menu</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="movie.html">Search / Movie</a></li>
+                <li><a href="favorites.html">Favorites</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <h1 class="section-title">Search Movies</h1>
+        
+        <!-- Обычная учебная форма поиска -->
+        <form action="movie.html" method="GET" class="search-box">
+            <input type="text" name="query" value="Mickey 17" placeholder="Search by title...">
+            <button type="submit" class="btn">Search</button>
+        </form>
+
+        <p style="margin-bottom: 20px; color: #94a3b8;">Results for: <strong style="color: #f8fafc;">"Mickey 17"</strong> (Found 1 match)</p>
+
+        <!-- Карточка выданного фильма -->
+        <div class="movie-result-card">
+            <img src="images/mickey17.jpg" alt="Mickey 17" class="movie-result-poster">
+            
+            <div class="movie-result-details">
+                <div>
+                    <h2>Mickey 17 (2025)</h2>
+                    <span class="movie-badge">Sci-Fi / Adventure</span>
+                    <p class="movie-desc">
+                        Mickey 17 is an employee sent to colonize a freezing world. Whenever he dies, a new clone is created with his memories.
+                    </p>
+                </div>
+                
+                <div class="actions-row">
+                    <button class="btn">Watch Now</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>MovieVerse &copy; 2026. Authors: Nurkhat Assan(pages 1,2), Daurenbek Anuar(pages 3,4).</p>
+    </footer>
+</body>
+</html>
