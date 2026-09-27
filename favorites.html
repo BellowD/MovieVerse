@@ -1,88 +1,758 @@
 <!-- Created by Daurenbek Anuar -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>MovieVerse - Favorites</title>
-    <link rel="stylesheet" href="css/style.css">
+
+
+    <!-- Bootstrap 5.3 -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Main MovieVerse CSS -->
+    <link rel="stylesheet" href="./css/style.css">
+
+
+    <!-- Favorites page fixes -->
+    <style>
+
+        /* =========================
+           FAVORITES PAGE
+           ========================= */
+
+        .favorites-page .container {
+            max-width: 1200px;
+        }
+
+
+        /* Bootstrap card group */
+
+        .favorites-page .card-group {
+            display: flex;
+            align-items: stretch;
+            gap: 18px;
+        }
+
+
+        /* Individual cards */
+
+        .favorites-page .card-group .movie-card {
+            flex: 1 1 0;
+            max-width: 360px;
+            min-width: 0;
+            margin: 0;
+        }
+
+
+        /* Poster */
+
+        .favorites-page .card-group .movie-card > img {
+            width: 100%;
+            height: 360px;
+            object-fit: cover;
+            display: block;
+        }
+
+
+        /* Card content */
+
+        .favorites-page .movie-info {
+            min-height: 145px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+
+        .favorites-page .movie-info .card-title {
+            color: #f8fafc;
+            margin-bottom: 8px;
+        }
+
+
+        .favorites-page .movie-info .card-text {
+            color: #94a3b8;
+            margin-bottom: 0;
+        }
+
+
+        /* Favorite star */
+
+        .favorites-page .fav-btn-active {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            z-index: 5;
+
+            width: 40px;
+            height: 40px;
+
+            padding: 0;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 1px solid #233044;
+            border-radius: 50%;
+
+            background-color: rgba(11, 15, 25, 0.9);
+            color: #38bdf8;
+
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+
+        .favorites-page .fav-btn-active:hover {
+            color: #ffffff;
+            border-color: #38bdf8;
+        }
+
+
+        /* Priority list */
+
+        .favorites-page .custom-ol {
+            color: #94a3b8;
+            padding-left: 24px;
+        }
+
+
+        .favorites-page .custom-ol li {
+            margin-bottom: 8px;
+        }
+
+
+        /* Team */
+
+        .favorites-page .team-box {
+            margin-bottom: 30px;
+        }
+
+
+        /* =========================
+           TABLET
+           ========================= */
+
+        @media (max-width: 900px) {
+
+            .favorites-page .card-group {
+                flex-wrap: wrap;
+            }
+
+
+            .favorites-page .card-group .movie-card {
+                flex: 1 1 calc(50% - 9px);
+                max-width: calc(50% - 9px);
+            }
+
+
+            .favorites-page .card-group .movie-card > img {
+                height: 330px;
+            }
+
+        }
+
+
+        /* =========================
+           MOBILE
+           ========================= */
+
+        @media (max-width: 576px) {
+
+            .favorites-page .card-group {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+
+            .favorites-page .card-group .movie-card {
+                flex: 1 1 100%;
+                max-width: 100%;
+                width: 100%;
+            }
+
+
+            .favorites-page .card-group .movie-card > img {
+                height: 360px;
+            }
+
+
+            .favorites-page .movie-info {
+                min-height: 135px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
+
 <body>
-<div class="page-layout">
-    <header id="main-header">
-        <nav class="nav-menu">
-            <div class="logo">MovieVerse</div>
-            <ul class="nav-links">
-                <li><a href="index.html">Main Menu</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="movie.html">Search / Movie</a></li>
-                <li><a href="favorites.html">Favorites</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <aside class="sidebar">
-        <h2>My Library</h2>
-        <ul>
-            <li><a href="favorites.html">Favorites</a></li>
-            <li><a href="index.html">Popular Movies</a></li>
-            <li><a href="profile.html">Profile</a></li>
-        </ul>
-    </aside>
 
-    <main>
-        <div class="container">
-            <h1 class="section-title">My Favorites</h1>
-            <p style="color: #94a3b8; margin-bottom: 25px;">Saved movies to watch later.</p>
+<div class="page-layout favorites-page">
 
-            <h3 style="color: #f8fafc; margin-bottom: 10px; font-size: 1.1rem;">Watch Priority Order:</h3>
-            <ol class="custom-ol">
-                <li>Avatar: Fire and Ash (Highest Priority)</li>
-                <li>Mickey 17 (Weekend plan)</li>
-                <li>Superman (Upcoming)</li>
-            </ol>
 
-            <!-- Flexbox is used for this card row as required by Task 2. -->
-            <div class="card-row">
-                <div class="movie-card">
-                    <button type="button" class="fav-btn-active">★</button>
-                    <img src="images/avatar.jpg" alt="Avatar">
-                    <div class="movie-info">
-                        <div><h3>Avatar: Fire and Ash</h3><p>Sci-Fi / Adventure</p></div>
-                        <button class="btn" type="button" style="margin-top: 10px; padding: 6px 12px; font-size: 0.85rem; background: #233044; color: #cbd5e1;">Remove</button>
-                    </div>
+    <!-- =========================
+         HEADER
+         ========================= -->
+
+    <header
+        id="main-header"
+        class="p-3 px-lg-4"
+    >
+
+        <nav
+            class="navbar navbar-expand-md navbar-dark p-0"
+            aria-label="Main navigation"
+        >
+
+            <div class="container-fluid p-0">
+
+
+                <!-- Logo -->
+
+                <a
+                    class="navbar-brand logo"
+                    href="./index.html"
+                >
+                    MovieVerse
+                </a>
+
+
+                <!-- Mobile menu -->
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#mainNav"
+                    aria-controls="mainNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+
+                <!-- Navigation -->
+
+                <div
+                    class="collapse navbar-collapse justify-content-end"
+                    id="mainNav"
+                >
+
+                    <ul class="navbar-nav nav-links gap-2 gap-md-3">
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="./index.html"
+                            >
+                                Main Menu
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="./profile.html"
+                            >
+                                Profile
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link"
+                                href="./movie.html"
+                            >
+                                Search / Movie
+                            </a>
+
+                        </li>
+
+
+                        <li class="nav-item">
+
+                            <a
+                                class="nav-link active"
+                                href="./favorites.html"
+                                aria-current="page"
+                            >
+                                Favorites
+                            </a>
+
+                        </li>
+
+
+                    </ul>
+
                 </div>
-                <div class="movie-card">
-                    <button type="button" class="fav-btn-active">★</button>
-                    <img src="images/superman.jpg" alt="Superman">
-                    <div class="movie-info">
-                        <div><h3>Superman</h3><p>Action / Superhero</p></div>
-                        <button class="btn" type="button" style="margin-top: 10px; padding: 6px 12px; font-size: 0.85rem; background: #233044; color: #cbd5e1;">Remove</button>
-                    </div>
-                </div>
-                <div class="movie-card">
-                    <button type="button" class="fav-btn-active">★</button>
-                    <img src="images/mickey17.jpg" alt="Mickey 17">
-                    <div class="movie-info">
-                        <div><h3>Mickey 17</h3><p>Sci-Fi / Mystery</p></div>
-                        <button class="btn" type="button" style="margin-top: 10px; padding: 6px 12px; font-size: 0.85rem; background: #233044; color: #cbd5e1;">Remove</button>
-                    </div>
-                </div>
+
+
             </div>
 
-            <section class="team-box">
-                <h2>About the Team</h2>
-                <ul>
-                    <li><strong>Nurkhat Assan:</strong> Main Menu & Profile</li>
-                    <li><strong>Daurenbek Anuar:</strong> Search & Favorites</li>
-                </ul>
+        </nav>
+
+    </header>
+
+
+    <!-- =========================
+         SIDEBAR
+         ========================= -->
+
+    <aside class="sidebar p-3">
+
+
+        <h2>
+            My Library
+        </h2>
+
+
+        <ul class="gap-2">
+
+
+            <li>
+
+                <a href="./favorites.html">
+                    Favorites
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="./index.html">
+                    Popular Movies
+                </a>
+
+            </li>
+
+
+            <li>
+
+                <a href="./profile.html">
+                    Profile
+                </a>
+
+            </li>
+
+
+        </ul>
+
+
+    </aside>
+
+
+    <!-- =========================
+         MAIN
+         ========================= -->
+
+    <main>
+
+
+        <div class="container mt-lg-4 px-sm-2 py-4">
+
+
+            <!-- =========================
+                 TITLE
+                 ========================= -->
+
+            <section class="mb-4">
+
+
+                <h1 class="section-title responsive-title">
+
+                    My Favorites
+
+                </h1>
+
+
+                <p class="responsive-text text-secondary mb-0">
+
+                    Saved movies to watch later.
+
+                </p>
+
+
             </section>
+
+
+            <!-- =========================
+                 PRIORITY
+                 ========================= -->
+
+            <section class="mb-5">
+
+
+                <h2
+                    class="h5 mb-3"
+                    style="color: #f8fafc;"
+                >
+
+                    Watch Priority Order:
+
+                </h2>
+
+
+                <ol class="custom-ol">
+
+
+                    <li>
+
+                        Avatar: Fire and Ash
+                        (Highest Priority)
+
+                    </li>
+
+
+                    <li>
+
+                        Mickey 17
+                        (Weekend plan)
+
+                    </li>
+
+
+                    <li>
+
+                        Superman
+                        (Upcoming)
+
+                    </li>
+
+
+                </ol>
+
+
+            </section>
+
+
+            <!-- =========================
+                 SAVED MOVIES
+                 TASK 8
+                 ========================= -->
+
+            <section
+                class="mb-5"
+                aria-labelledby="saved-movies-title"
+            >
+
+
+                <h2
+                    id="saved-movies-title"
+                    class="section-title mb-4"
+                >
+
+                    Saved Movies
+
+                </h2>
+
+
+                <!-- Bootstrap card-group -->
+
+                <div class="card-group">
+
+
+                    <!-- =========================
+                         AVATAR
+                         ========================= -->
+
+                    <article class="movie-card card">
+
+
+                        <button
+                            type="button"
+                            class="fav-btn-active"
+                            title="Remove Avatar from favorites"
+                            aria-label="Remove Avatar from favorites"
+                        >
+
+                            ★
+
+                        </button>
+
+
+                        <img
+                            src="./images/avatar.jpg"
+                            alt="Avatar: Fire and Ash"
+                        >
+
+
+                        <div class="movie-info card-body">
+
+
+                            <div>
+
+                                <h3 class="card-title h5">
+
+                                    Avatar: Fire and Ash
+
+                                </h3>
+
+
+                                <p class="card-text">
+
+                                    Sci-Fi / Adventure
+
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="btn btn-secondary btn-sm mt-3"
+                            >
+
+                                Remove
+
+                            </button>
+
+
+                        </div>
+
+
+                    </article>
+
+
+                    <!-- =========================
+                         SUPERMAN
+                         ========================= -->
+
+                    <article class="movie-card card">
+
+
+                        <button
+                            type="button"
+                            class="fav-btn-active"
+                            title="Remove Superman from favorites"
+                            aria-label="Remove Superman from favorites"
+                        >
+
+                            ★
+
+                        </button>
+
+
+                        <img
+                            src="./images/superman.jpg"
+                            alt="Superman"
+                        >
+
+
+                        <div class="movie-info card-body">
+
+
+                            <div>
+
+                                <h3 class="card-title h5">
+
+                                    Superman
+
+                                </h3>
+
+
+                                <p class="card-text">
+
+                                    Action / Superhero
+
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="btn btn-secondary btn-sm mt-3"
+                            >
+
+                                Remove
+
+                            </button>
+
+
+                        </div>
+
+
+                    </article>
+
+
+                    <!-- =========================
+                         MICKEY 17
+                         ========================= -->
+
+                    <article class="movie-card card">
+
+
+                        <button
+                            type="button"
+                            class="fav-btn-active"
+                            title="Remove Mickey 17 from favorites"
+                            aria-label="Remove Mickey 17 from favorites"
+                        >
+
+                            ★
+
+                        </button>
+
+
+                        <img
+                            src="./images/mickey17.jpg"
+                            alt="Mickey 17"
+                        >
+
+
+                        <div class="movie-info card-body">
+
+
+                            <div>
+
+                                <h3 class="card-title h5">
+
+                                    Mickey 17
+
+                                </h3>
+
+
+                                <p class="card-text">
+
+                                    Sci-Fi / Mystery
+
+                                </p>
+
+                            </div>
+
+
+                            <button
+                                type="button"
+                                class="btn btn-secondary btn-sm mt-3"
+                            >
+
+                                Remove
+
+                            </button>
+
+
+                        </div>
+
+
+                    </article>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- =========================
+                 TEAM
+                 ========================= -->
+
+            <section class="team-box mt-4 p-4">
+
+
+                <h2>
+
+                    About the Team
+
+                </h2>
+
+
+                <ul class="mb-0">
+
+
+                    <li>
+
+                        <strong>
+                            Nurkhat Assan:
+                        </strong>
+
+                        Main Menu &amp; Profile
+
+                    </li>
+
+
+                    <li>
+
+                        <strong>
+                            Daurenbek Anuar:
+                        </strong>
+
+                        Search &amp; Favorites
+
+                    </li>
+
+
+                </ul>
+
+
+            </section>
+
+
         </div>
+
+
     </main>
 
-    <footer>
-        <p>MovieVerse &copy; 2026. Authors: Nurkhat Assan, Daurenbek Anuar.</p>
+
+    <!-- =========================
+         FOOTER
+         ========================= -->
+
+    <footer class="p-3">
+
+
+        <p class="mb-0">
+
+            MovieVerse &copy; 2026.
+
+            Authors:
+            Nurkhat Assan,
+            Daurenbek Anuar.
+
+        </p>
+
+
     </footer>
+
+
 </div>
+
+
+<!-- Bootstrap JS -->
+
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+></script>
+
+
 </body>
+
 </html>

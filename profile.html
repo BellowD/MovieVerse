@@ -2,114 +2,461 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>MovieVerse - Profile</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
     <link rel="stylesheet" href="css/style.css">
+
 </head>
+
+
 <body>
+
 <div class="page-layout">
-    <header id="main-header">
-        <nav class="nav-menu">
-            <div class="logo">MovieVerse</div>
-            <ul class="nav-links">
-                <li><a href="index.html">Main Menu</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="movie.html">Search / Movie</a></li>
-                <li><a href="favorites.html">Favorites</a></li>
-            </ul>
+
+
+    <header id="main-header" class="p-3 px-lg-4">
+
+        <!-- TASK 5 -->
+        <nav
+            class="navbar navbar-expand-md navbar-dark p-0"
+            aria-label="Main navigation"
+        >
+
+            <div class="container-fluid p-0">
+
+                <a
+                    class="navbar-brand logo"
+                    href="index.html"
+                >
+                    MovieVerse
+                </a>
+
+
+                <button
+                    class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#mainNav"
+                    aria-controls="mainNav"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation"
+                >
+
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+
+                <div
+                    class="collapse navbar-collapse justify-content-end"
+                    id="mainNav"
+                >
+
+                    <ul class="navbar-nav nav-links gap-2 gap-md-3">
+
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                href="index.html"
+                            >
+                                Main Menu
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                href="profile.html"
+                            >
+                                Profile
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                href="movie.html"
+                            >
+                                Search / Movie
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a
+                                class="nav-link"
+                                href="./favorites.html"
+                            >
+                                Favorites
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
         </nav>
+
     </header>
 
-    <aside class="sidebar">
-        <h2>Profile</h2>
-        <ul>
-            <li><a href="profile.html">My Profile</a></li>
-            <li><a href="#ratings">Ratings</a></li>
-            <li><a href="#settings">Settings</a></li>
+
+    <aside class="sidebar p-3">
+
+        <h2>
+            Profile
+        </h2>
+
+        <ul class="gap-2">
+
+            <li>
+                <a href="profile.html">
+                    My Profile
+                </a>
+            </li>
+
+            <li>
+                <a href="#ratings">
+                    Ratings
+                </a>
+            </li>
+
+            <li>
+                <a href="#settings">
+                    Settings
+                </a>
+            </li>
+
         </ul>
+
     </aside>
 
+
     <main>
-        <div class="container">
-            <section class="profile-header">
-                <img src="images/profile.jpg" alt="Profile Picture" class="profile-img">
+
+        <div class="container py-4 py-lg-5 mt-lg-4 px-sm-2">
+
+
+            <section class="profile-header mb-5 gap-4 p-4">
+
+                <img
+                    src="images/profile.jpg"
+                    alt="Profile Picture"
+                    class="profile-img"
+                >
+
+
                 <div class="profile-info">
-                    <h1>Kairat_Nurtas</h1>
-                    <p class="email">kairat67@gmail.com</p>
+
+                    <h1 class="mb-1">
+                        Kairat_Nurtas
+                    </h1>
+
+                    <p class="email mb-0">
+                        kairat67@gmail.com
+                    </p>
+
                 </div>
+
             </section>
 
-            <hr class="divider">
 
-            <section id="ratings">
-                <h2 class="section-title">Recently Rated Movies</h2>
+            <hr class="divider mb-5">
+
+
+            <section id="ratings" class="mb-5">
+
+                <h2 class="section-title ps-2 mb-4">
+                    Recently Rated Movies
+                </h2>
+
+
                 <div class="table-wrapper">
+
                     <table class="ratings-table">
+
+                        <caption class="visually-hidden">
+                            Recently rated movies
+                        </caption>
+
+
                         <thead>
+
                             <tr>
-                                <th>Movie Title</th>
-                                <th>Genre</th>
-                                <th>Date Rated</th>
-                                <th>User Rating</th>
+
+                                <th
+                                    scope="col"
+                                    class="p-3"
+                                >
+                                    Movie Title
+                                </th>
+
+                                <th
+                                    scope="col"
+                                    class="p-3"
+                                >
+                                    Genre
+                                </th>
+
+                                <th
+                                    scope="col"
+                                    class="p-3"
+                                >
+                                    Date Rated
+                                </th>
+
+                                <th
+                                    scope="col"
+                                    class="p-3"
+                                >
+                                    User Rating
+                                </th>
+
                             </tr>
+
                         </thead>
+
+
                         <tbody>
+
                             <tr>
-                                <td>Avatar: Fire and Ash</td>
-                                <td>Sci-Fi / Adventure</td>
-                                <td>2026-09-12</td>
-                                <td>★ 9.5 / 10</td>
+
+                                <td class="p-3">
+                                    Avatar: Fire and Ash
+                                </td>
+
+                                <td class="p-3">
+                                    Sci-Fi / Adventure
+                                </td>
+
+                                <td class="p-3">
+                                    2026-09-12
+                                </td>
+
+                                <td class="p-3">
+                                    ★ 9.5 / 10
+                                </td>
+
                             </tr>
+
+
                             <tr>
-                                <td>Mickey 17</td>
-                                <td>Sci-Fi / Mystery</td>
-                                <td>2026-09-10</td>
-                                <td>★ 8.8 / 10</td>
+
+                                <td class="p-3">
+                                    Mickey 17
+                                </td>
+
+                                <td class="p-3">
+                                    Sci-Fi / Mystery
+                                </td>
+
+                                <td class="p-3">
+                                    2026-09-10
+                                </td>
+
+                                <td class="p-3">
+                                    ★ 8.8 / 10
+                                </td>
+
                             </tr>
+
+
                             <tr>
-                                <td>Mission: Impossible - The Final Reckoning</td>
-                                <td>Action / Spy</td>
-                                <td>2026-09-05</td>
-                                <td>★ 9.0 / 10</td>
+
+                                <td class="p-3">
+                                    Mission: Impossible - The Final Reckoning
+                                </td>
+
+                                <td class="p-3">
+                                    Action / Spy
+                                </td>
+
+                                <td class="p-3">
+                                    2026-09-05
+                                </td>
+
+                                <td class="p-3">
+                                    ★ 9.0 / 10
+                                </td>
+
                             </tr>
+
                         </tbody>
+
                     </table>
+
                 </div>
+
             </section>
 
-            <section id="settings">
-                <h2 class="section-title">Profile Settings</h2>
-                <form id="contact-form" class="form-card">
-                    <div class="form-group">
-                        <label for="username">Display Username:</label>
-                        <input type="text" id="username" name="username" value="Kairat_Nurtas">
+
+            <!-- TASK 9 -->
+            <section id="settings" class="mb-5">
+
+                <h2 class="section-title ps-2 mb-4">
+                    Profile Settings
+                </h2>
+
+
+                <form
+                    id="contact-form"
+                    class="form-card p-4"
+                >
+
+
+                    <div class="mb-3">
+
+                        <label
+                            for="username"
+                            class="form-label"
+                        >
+                            Display Username:
+                        </label>
+
+                        <input
+                            class="form-control"
+                            type="text"
+                            id="username"
+                            name="username"
+                            value="Kairat_Nurtas"
+                        >
+
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email Address:</label>
-                        <input type="email" id="email" name="email" value="kairat67@gmail.com" required>
+
+
+                    <div class="mb-3">
+
+                        <label
+                            for="email"
+                            class="form-label"
+                        >
+                            Email Address:
+                        </label>
+
+                        <input
+                            class="form-control"
+                            type="email"
+                            id="email"
+                            name="email"
+                            value="kairat67@gmail.com"
+                            required
+                        >
+
                     </div>
-                    <div class="form-group">
-                        <label for="fav-genre">Favorite Genre:</label>
-                        <select id="fav-genre" name="fav-genre">
-                            <option value="action">Action</option>
-                            <option value="scifi">Sci-Fi</option>
-                            <option value="drama">Drama</option>
+
+
+                    <div class="mb-3">
+
+                        <label
+                            for="fav-genre"
+                            class="form-label"
+                        >
+                            Favorite Genre:
+                        </label>
+
+                        <select
+                            class="form-select"
+                            id="fav-genre"
+                            name="fav-genre"
+                        >
+
+                            <option value="action">
+                                Action
+                            </option>
+
+                            <option value="scifi">
+                                Sci-Fi
+                            </option>
+
+                            <option value="drama">
+                                Drama
+                            </option>
+
                         </select>
+
                     </div>
-                    <div class="form-group">
-                        <label for="bio">Bio / Status:</label>
-                        <textarea id="bio" name="bio" rows="3">Cinema enthusiast and student at AITU.</textarea>
+
+
+                    <div class="mb-4">
+
+                        <label
+                            for="bio"
+                            class="form-label"
+                        >
+                            Bio / Status:
+                        </label>
+
+                        <textarea
+                            class="form-control"
+                            id="bio"
+                            name="bio"
+                            rows="3"
+                        >Cinema enthusiast and student at AITU.</textarea>
+
                     </div>
-                    <button type="submit" class="btn">Update Profile</button>
+
+
+                    <!-- TASK 6 -->
+                    <div
+                        class="btn-group"
+                        role="group"
+                        aria-label="Profile actions"
+                    >
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary"
+                        >
+                            Update Profile
+                        </button>
+
+                        <button
+                            type="reset"
+                            class="btn btn-outline-secondary"
+                        >
+                            Reset
+                        </button>
+
+                    </div>
+
+
                 </form>
+
             </section>
+
+
         </div>
+
     </main>
 
-    <footer>
-        <p>MovieVerse &copy; 2026. Authors: Nurkhat Assan, Daurenbek Anuar.</p>
+
+    <footer class="p-3">
+
+        <p class="mb-0">
+            MovieVerse &copy; 2026.
+            Authors: Nurkhat Assan, Daurenbek Anuar.
+        </p>
+
     </footer>
+
+
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

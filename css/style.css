@@ -1,572 +1,781 @@
-/* MovieVerse - Assignment #2: Advanced CSS (Flexbox & Grid) */
+/* MovieVerse - Assignment #3
+   Responsive Design + Bootstrap
+*/
+
 
 * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
 }
+
 
 html {
     scroll-behavior: smooth;
 }
 
+
 body {
     min-height: 100vh;
-    font-family: 'Segoe UI', system-ui, sans-serif;
+    font-family: "Segoe UI", system-ui, sans-serif;
     background-color: #0b0f19;
     color: #cbd5e1;
     line-height: 1.5;
 }
 
+
 /* =========================
-   TASK 3 - GRID PAGE LAYOUT
+   PAGE GRID
    ========================= */
 
 .page-layout {
+
     min-height: 100vh;
+
     display: grid;
+
     grid-template-columns: 220px minmax(0, 1fr);
-    grid-template-rows: auto minmax(0, 1fr) auto;
+
+    grid-template-rows:
+        auto
+        minmax(0, 1fr)
+        auto;
+
     grid-template-areas:
+
         "header header"
         "sidebar main"
         "footer footer";
 }
 
+
 #main-header {
+
     grid-area: header;
+
     background-color: #111827;
-    border-bottom: 1px solid #1f2937;
-    padding: 1rem 2.5rem;
+
+    border-bottom:
+        1px solid #1f2937;
 }
+
+
+main {
+
+    grid-area: main;
+
+    min-width: 0;
+}
+
+
+.sidebar {
+
+    grid-area: sidebar;
+
+    background-color: #0f172a;
+
+    border-right:
+        1px solid #1f2937;
+}
+
+
+.sidebar h2 {
+
+    color: #f8fafc;
+
+    font-size: 1rem;
+}
+
+
+.sidebar ul {
+
+    list-style: none;
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+.sidebar a {
+
+    display: block;
+
+    color: #94a3b8;
+
+    text-decoration: none;
+
+    border-radius: 6px;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.sidebar a:hover {
+
+    background-color: #161f30;
+
+    color: #38bdf8;
+}
+
 
 /* =========================
-   TASK 1 - FLEXBOX NAVIGATION
+   BOOTSTRAP NAVBAR
    ========================= */
 
-.nav-menu {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    gap: 30px;
-}
-
 .logo {
-    color: #38bdf8;
+
+    color: #38bdf8 !important;
+
     font-size: 1.6rem;
+
     font-weight: 700;
+
     letter-spacing: 0.5px;
+
     white-space: nowrap;
 }
 
+
 .nav-links {
+
     list-style: none;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 24px;
-    flex-wrap: wrap;
 }
+
 
 .nav-links a {
-    color: #94a3b8;
+
+    color: #94a3b8 !important;
+
     text-decoration: none;
+
     font-weight: 500;
-    transition: color 0.2s ease;
+
+    transition:
+        color 0.2s ease;
 }
 
-.nav-links a:hover {
-    color: #38bdf8;
+
+.nav-links a:hover,
+.nav-links a:focus {
+
+    color: #38bdf8 !important;
 }
+
 
 /* =========================
-   TASK 3 - GRID SIDEBAR
+   MAIN CONTENT
    ========================= */
-
-.sidebar {
-    grid-area: sidebar;
-    background-color: #0f172a;
-    border-right: 1px solid #1f2937;
-    padding: 24px 18px;
-}
-
-.sidebar h2 {
-    color: #f8fafc;
-    font-size: 1rem;
-    margin-bottom: 14px;
-}
-
-.sidebar ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.sidebar a {
-    display: block;
-    padding: 9px 10px;
-    color: #94a3b8;
-    text-decoration: none;
-    border-radius: 6px;
-    transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-.sidebar a:hover {
-    background-color: #161f30;
-    color: #38bdf8;
-}
-
-/* =========================
-   GRID MAIN AREA
-   ========================= */
-
-main {
-    grid-area: main;
-    min-width: 0;
-}
 
 .container {
+
     width: min(1200px, 100%);
-    margin: 0 auto;
-    padding: 2.5rem 1.5rem;
 }
+
 
 .section-title {
+
     color: #f8fafc;
+
     font-size: 1.5rem;
-    margin-bottom: 1.2rem;
-    border-left: 4px solid #38bdf8;
-    padding-left: 10px;
+
+    border-left:
+        4px solid #38bdf8;
 }
+
 
 /* =========================
-   TASK 2 - FLEXBOX CARD ROW
+   TASK 1
+   RESPONSIVE TYPOGRAPHY
    ========================= */
 
-.card-row {
-    display: flex;
-    align-items: stretch;
-    gap: 20px;
-    margin-bottom: 3rem;
+.responsive-title {
+
+    font-size: 1.5rem;
 }
 
-.card-row .movie-card {
-    flex: 1 1 0;
-    min-width: 0;
-}
 
-/* =========================
-   TASK 4 - CSS GRID GALLERY
-   ========================= */
+.responsive-text {
 
-.gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-auto-rows: 1fr;
-    gap: 20px;
-    margin-bottom: 3rem;
-}
-
-.gallery-item {
-    position: relative;
-    min-height: 320px;
-    overflow: hidden;
-    border: 2px solid #233044;
-    border-radius: 10px;
-    background-color: #161f30;
-}
-
-.gallery-item img {
-    width: 100%;
-    height: 100%;
-    min-height: 320px;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.3s ease;
-}
-
-.gallery-caption {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 18px 14px;
-    color: #f8fafc;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-}
-
-.gallery-caption strong {
-    display: block;
     font-size: 1rem;
 }
 
-.gallery-caption span {
-    color: #cbd5e1;
-    font-size: 0.82rem;
-}
-
-.gallery-item:hover {
-    border-color: #38bdf8;
-}
-
-.gallery-item:hover img {
-    transform: scale(1.05);
-}
-
-.gallery-item:hover .gallery-caption {
-    transform: translateY(0);
-}
 
 /* =========================
-   MOVIE CARDS
+   TASK 2
+   FLEXBOX CARD GROUP
+   =========================
+
+   Desktop: 3 cards
+   Tablet: 2 cards
+   Mobile: 1 card
+
+*/
+
+
+.card-row {
+
+    display: flex;
+
+    align-items: stretch;
+}
+
+
+.card-row .movie-card {
+
+    flex: 1 1 0;
+
+    min-width: 0;
+}
+
+
+/* =========================
+   BOOTSTRAP CARDS
    ========================= */
 
 .movie-card {
+
     position: relative;
+
     background-color: #161f30;
-    border: 2px solid #233044;
+
+    border:
+        2px solid #233044;
+
     border-radius: 10px;
+
     overflow: hidden;
+
     display: flex;
+
     flex-direction: column;
+
     min-width: 0;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
 }
+
 
 .movie-card:hover {
+
     border-color: #38bdf8;
-    box-shadow: 0 0 12px rgba(56, 189, 248, 0.25);
-    transform: translateY(-4px);
+
+    box-shadow:
+        0 0 12px rgba(56, 189, 248, 0.25);
+
+    transform:
+        translateY(-4px);
 }
 
+
 .movie-card img {
+
     width: 100%;
+
     height: 330px;
+
     object-fit: cover;
+
     display: block;
 }
 
+
 .movie-info {
-    padding: 14px;
+
     display: flex;
+
     flex-direction: column;
+
     flex-grow: 1;
+
     justify-content: space-between;
 }
 
+
 .movie-info h3 {
+
     color: #f1f5f9;
+
     font-size: 1.05rem;
-    margin-bottom: 6px;
 }
 
+
 .movie-info p {
+
     font-size: 0.85rem;
+
     color: #64748b;
 }
 
+
+/* Favorite star */
+
 .fav-btn,
 .fav-btn-active {
+
     position: absolute;
+
     top: 10px;
+
     right: 10px;
+
     z-index: 2;
+
     width: 36px;
+
     height: 36px;
-    border: 1px solid #233044;
+
+    border:
+        1px solid #233044;
+
     border-radius: 50%;
-    background: rgba(11, 15, 25, 0.85);
+
+    background:
+        rgba(11, 15, 25, 0.85);
+
     color: #f8fafc;
+
     cursor: pointer;
+
     font-size: 1rem;
+
+    padding: 0;
 }
+
 
 .fav-btn:hover,
 .fav-btn-active:hover {
+
     color: #38bdf8;
 }
 
+
 .fav-btn-active {
+
     color: #38bdf8;
 }
+
+
+/* =========================
+   TASK 3
+   BOOTSTRAP GRID
+   ========================= */
+
+.info-box {
+
+    background-color: #161f30;
+
+    border:
+        1px solid #233044;
+
+    border-radius: 10px;
+}
+
+
+.info-box h2,
+.info-box h3 {
+
+    color: #f8fafc;
+}
+
+
+.info-box p {
+
+    color: #94a3b8;
+}
+
+
+/* =========================
+   TASK 7
+   CAROUSEL
+   ========================= */
+
+.carousel-img {
+
+    height: 430px;
+
+    object-fit: cover;
+}
+
 
 /* =========================
    PROFILE
    ========================= */
 
 .profile-header {
+
     display: flex;
+
     align-items: center;
-    gap: 24px;
-    margin-bottom: 2.5rem;
+
     background-color: #161f30;
-    border: 1px solid #233044;
-    padding: 24px;
+
+    border:
+        1px solid #233044;
+
     border-radius: 12px;
 }
 
-.profile-img {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 3px solid #38bdf8;
-}
 
 .profile-info h1 {
+
     color: #f8fafc;
+
     font-size: 1.6rem;
-    margin-bottom: 4px;
 }
+
 
 .profile-info .email {
+
     font-size: 0.9rem;
+
     color: #94a3b8;
-    margin-bottom: 8px;
 }
 
-.divider {
-    height: 1px;
-    border: 0;
-    background-color: #233044;
-    margin-bottom: 2rem;
+
+.profile-img {
+
+    width: 110px;
+
+    height: 110px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border:
+        3px solid #38bdf8;
 }
+
+
+.divider {
+
+    height: 1px;
+
+    border: 0;
+
+    background-color: #233044;
+}
+
 
 /* =========================
    TABLE
    ========================= */
 
 .table-wrapper {
+
     overflow-x: auto;
-    margin-bottom: 2rem;
 }
 
+
 .ratings-table {
+
     width: 100%;
+
     border-collapse: collapse;
+
     background-color: #161f30;
+
     border-radius: 8px;
+
     overflow: hidden;
-    border: 1px solid #233044;
+
+    border:
+        1px solid #233044;
+
     min-width: 650px;
 }
 
+
 .ratings-table th,
 .ratings-table td {
-    padding: 14px 18px;
+
     text-align: left;
-    border-bottom: 1px solid #233044;
+
+    border-bottom:
+        1px solid #233044;
 }
 
+
 .ratings-table th {
+
     background-color: #111827;
+
     color: #38bdf8;
+
     font-weight: 600;
 }
 
+
 .ratings-table tr:last-child td {
+
     border-bottom: none;
 }
 
+
 /* =========================
-   FORMS / BUTTONS
+   TASK 9
+   BOOTSTRAP FORMS
    ========================= */
 
 .form-card,
 .search-box {
+
     background: #161f30;
-    border: 1px solid #233044;
+
+    border:
+        1px solid #233044;
+
     border-radius: 8px;
-    padding: 20px;
 }
 
+
 .form-card {
+
     max-width: 600px;
 }
 
-.form-group {
-    margin-bottom: 15px;
+
+.form-control,
+.form-select {
+
+    background-color: #0b0f19;
+
+    color: #f8fafc;
+
+    border-color: #233044;
 }
 
-label {
-    display: block;
-    margin-bottom: 6px;
-    color: #cbd5e1;
-    font-size: 0.9rem;
-}
 
-input[type="text"],
-input[type="email"],
-select,
-textarea {
-    width: 100%;
-    padding: 10px 12px;
-    background: #0b0f19;
-    border: 1px solid #233044;
-    color: #fff;
-    border-radius: 6px;
-    font-family: inherit;
-}
+.form-control:focus,
+.form-select:focus {
 
-input:focus,
-textarea:focus,
-select:focus {
+    background-color: #0b0f19;
+
+    color: #f8fafc;
+
     border-color: #38bdf8;
-    outline: none;
+
+    box-shadow:
+        0 0 0 0.15rem
+        rgba(56, 189, 248, 0.2);
 }
 
-.btn {
-    background-color: #38bdf8;
-    color: #0b0f19;
-    border: none;
-    padding: 10px 22px;
-    cursor: pointer;
-    border-radius: 6px;
-    font-weight: 600;
-    transition: background-color 0.2s ease, transform 0.2s ease;
+
+.form-select option {
+
+    background-color: #0b0f19;
+
+    color: #f8fafc;
 }
 
-.btn:hover {
-    background-color: #0284c7;
-    color: #fff;
-    transform: translateY(-2px);
-}
 
-.search-box {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 20px;
-}
+.search-box .form-control {
 
-.search-box input {
-    flex: 1;
-}
-
-.movie-result-card {
-    display: flex;
-    align-items: stretch;
-    gap: 24px;
-    background-color: #161f30;
-    border: 1px solid #233044;
-    border-radius: 12px;
-    padding: 20px;
-}
-
-.movie-result-poster {
-    width: 240px;
-    min-height: 340px;
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.movie-result-details {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     min-width: 0;
 }
 
-.movie-result-details h2 {
-    color: #f8fafc;
-    margin-bottom: 10px;
+
+/* =========================
+   MOVIE RESULT
+   ========================= */
+
+.movie-result-card {
+
+    display: flex;
+
+    align-items: stretch;
+
+    background-color: #161f30;
+
+    border:
+        1px solid #233044;
+
+    border-radius: 12px;
 }
+
+
+.movie-result-poster {
+
+    width: 240px;
+
+    height: 340px;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+
+    flex-shrink: 0;
+}
+
+
+.movie-result-details {
+
+    flex: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    min-width: 0;
+}
+
+
+.movie-result-details h2 {
+
+    color: #f8fafc;
+
+    font-size: 2.2rem;
+}
+
 
 .movie-desc {
+
     color: #94a3b8;
-    margin-top: 16px;
+
+    line-height: 1.6;
 }
+
 
 .movie-badge {
+
     display: inline-block;
+
     color: #38bdf8;
-    border: 1px solid #233044;
-    padding: 3px 10px;
+
+    border:
+        1px solid #233044;
+
     border-radius: 4px;
-    font-size: 0.8rem;
+
+    font-size: 0.85rem;
 }
 
+
 .actions-row {
-    display: flex;
-    gap: 10px;
-    margin-top: 20px;
+
+    align-self: flex-start;
 }
+
 
 /* =========================
    LIST / TEAM
    ========================= */
 
 .custom-ol {
-    margin: 0 0 2rem 25px;
+
     color: #94a3b8;
 }
 
-.custom-ol li {
-    margin-bottom: 7px;
-}
 
 .team-box {
+
     background-color: #161f30;
-    border: 1px solid #233044;
-    padding: 20px;
+
+    border:
+        1px solid #233044;
+
     border-radius: 10px;
-    margin-top: 2rem;
 }
+
 
 .team-box h2 {
+
     color: #f8fafc;
-    margin-bottom: 8px;
 }
 
+
 .team-box ul {
-    margin-left: 20px;
+
     color: #94a3b8;
 }
 
+
 /* =========================
-   TASK 3 - GRID FOOTER
+   FOOTER
    ========================= */
 
 footer {
+
     grid-area: footer;
+
     background-color: #111827;
-    border-top: 1px solid #1f2937;
-    padding: 20px 2.5rem;
-    text-align: center;
+
+    border-top:
+        1px solid #1f2937;
+
     color: #64748b;
 }
 
+
 /* =========================
-   RESPONSIVE DESIGN
+   RESPONSIVE MEDIA QUERIES
    ========================= */
 
+
+/*
+   TABLET
+*/
+
 @media (max-width: 1000px) {
-    .page-layout {
-        grid-template-columns: 180px minmax(0, 1fr);
-    }
+
+    /*
+       TASK 2:
+       3 cards -> 2 cards
+    */
 
     .card-row {
+
         flex-wrap: wrap;
     }
 
+
     .card-row .movie-card {
-        flex: 1 1 calc(50% - 10px);
+
+        flex:
+            1 1 calc(50% - 0.5rem);
     }
 
-    .gallery-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    /*
+       TASK 1
+    */
+
+    .responsive-title {
+
+        font-size: 1.8rem;
     }
+
+
+    .responsive-text {
+
+        font-size: 1.05rem;
+    }
+
 }
 
+
+/*
+   MOBILE
+*/
+
 @media (max-width: 768px) {
+
     .page-layout {
+
         grid-template-columns: 1fr;
-        grid-template-rows: auto auto minmax(0, 1fr) auto;
+
+        grid-template-rows:
+            auto
+            auto
+            minmax(0, 1fr)
+            auto;
+
         grid-template-areas:
             "header"
             "sidebar"
@@ -574,78 +783,160 @@ footer {
             "footer";
     }
 
-    #main-header {
-        padding: 1rem;
-    }
-
-    .nav-menu {
-        flex-direction: column;
-        justify-content: center;
-    }
-
-    .nav-links {
-        justify-content: center;
-        gap: 12px 18px;
-    }
 
     .sidebar {
+
         border-right: 0;
-        border-bottom: 1px solid #1f2937;
-        padding: 14px;
+
+        border-bottom:
+            1px solid #1f2937;
     }
 
+
     .sidebar ul {
+
         flex-direction: row;
+
         flex-wrap: wrap;
     }
 
-    .container {
-        padding: 2rem 1rem;
-    }
 
     .profile-header {
+
         flex-direction: column;
+
         text-align: center;
     }
 
+
     .movie-result-card {
+
         flex-direction: column;
     }
+
 
     .movie-result-poster {
-        width: 100%;
-        max-height: 450px;
+
+        width: 220px;
+
+        height: 315px;
+
+        margin: 0 auto;
     }
 
-    footer {
-        padding: 18px 1rem;
+
+    .movie-result-details h2 {
+
+        font-size: 1.8rem;
     }
+
+
+    .carousel-img {
+
+        height: 350px;
+    }
+
+
+    /*
+       Bootstrap card-group becomes vertical
+       on smaller screens.
+    */
+
+    .card-group {
+
+        flex-direction: column;
+    }
+
 }
 
-@media (max-width: 480px) {
+
+/*
+   SMALL MOBILE
+*/
+
+@media (max-width: 576px) {
+
+    /*
+       TASK 2:
+       2 cards -> 1 card
+    */
+
     .card-row {
+
         flex-direction: column;
     }
+
 
     .card-row .movie-card {
-        flex: 1 1 auto;
+
+        flex:
+            1 1 auto;
     }
 
-    .gallery-grid {
-        grid-template-columns: 1fr;
+
+    /*
+       TASK 1
+    */
+
+    .responsive-title {
+
+        font-size: 1.5rem;
     }
 
-    .gallery-item,
-    .gallery-item img {
-        min-height: 360px;
+
+    .responsive-text {
+
+        font-size: 1rem;
     }
 
-    .search-box {
-        flex-direction: column;
+
+    .carousel-img {
+
+        height: 300px;
     }
 
-    .nav-links {
-        flex-direction: column;
-        align-items: center;
+
+    .movie-result-poster {
+
+        width: 180px;
+
+        height: 260px;
     }
+
+
+    .actions-row {
+
+        width: 100%;
+    }
+
+
+    .actions-row .btn {
+
+        flex: 1;
+    }
+
+}
+
+
+/*
+   DESKTOP
+*/
+
+@media (min-width: 1200px) {
+
+    /*
+       TASK 1
+    */
+
+    .responsive-title {
+
+        font-size: 2rem;
+    }
+
+
+    .responsive-text {
+
+        font-size: 1.1rem;
+    }
+
 }
