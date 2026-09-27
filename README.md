@@ -96,7 +96,7 @@ The layout changes automatically depending on the screen width.
 
 ## Deployment
 
-Website URL:
+Website URL: https://bellowd.github.io/MovieVerse/
 
 
 
