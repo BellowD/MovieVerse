@@ -23,8 +23,8 @@
                 type="button"
                 class="theme-toggle"
                 id="change-background"
-                aria-label="Change background color">
-                Change background
+                aria-label="Toggle theme">
+                Light Theme
             </button>
         </nav>
     </header>
@@ -68,18 +68,41 @@
                             Mickey 17 is an employee sent to colonize a
                             freezing world. Whenever he dies, a new clone
                             is created with his memories.
+                            <span id="more-text" style="display: none;">
+                                In this sci-fi thriller directed by Bong Joon-ho, Mickey Barnes faces impossible odds on an ice world, until he accidentally meets another clone of himself who is determined to survive.
+                            </span>
                         </p>
+                        <!-- Read More toggle button -->
+                        <button type="button" id="read-more-btn" class="read-more-btn">Read More</button>
+                    </div>
+
+                    <!-- Interactive star rating widget -->
+                    <div class="rating-widget" id="movie-rating-widget">
+                        <span class="rating-title">Your Rating:</span>
+                        <div class="stars-row" id="movie-stars">
+                            <span class="star-rating-item" data-rating="1" title="1 star">★</span>
+                            <span class="star-rating-item" data-rating="2" title="2 stars">★</span>
+                            <span class="star-rating-item" data-rating="3" title="3 stars">★</span>
+                            <span class="star-rating-item" data-rating="4" title="4 stars">★</span>
+                            <span class="star-rating-item" data-rating="5" title="5 stars">★</span>
+                            <span id="rating-score-text" class="rating-score">Click a star to rate</span>
+                        </div>
                     </div>
 
                     <div class="actions-row">
-                        <button class="btn" type="button">Watch Now</button>
+                        <button class="btn" type="button" id="watch-now-btn">Watch Now</button>
+                        <span id="watch-feedback" style="display: none; color: #38bdf8; align-self: center; font-size: 0.9rem;">Starting movie player...</span>
                     </div>
                 </div>
             </div>
 
             <!-- TASK 2: FAQ Accordion -->
+
             <section id="movie-faq" style="margin-top: 35px;">
                 <h2 class="section-title">Frequently Asked Questions</h2>
+
+
+                
 
                 <div class="faq-item"
                      style="margin-bottom: 12px; border-radius: 8px;

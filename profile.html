@@ -23,8 +23,8 @@
                 type="button"
                 class="theme-toggle"
                 id="change-background"
-                aria-label="Change background color">
-                Change background
+                aria-label="Toggle theme">
+                Light Theme
             </button>
         </nav>
     </header>
@@ -117,7 +117,11 @@
                         <textarea id="bio" name="bio" rows="3">Cinema enthusiast and student at AITU.</textarea>
                     </div>
 
-                    <button type="submit" class="btn">Update Profile</button>
+                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                        <button type="submit" class="btn">Update Profile</button>
+                        <button type="button" id="reset-profile-btn" class="btn btn-secondary">Reset Fields</button>
+                    </div>
+                    <p id="profile-status" style="margin-top: 14px; font-weight: 500; min-height: 20px;"></p>
                 </form>
             </section>
 

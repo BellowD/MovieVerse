@@ -22,8 +22,8 @@
                 type="button"
                 class="theme-toggle"
                 id="change-background"
-                aria-label="Change background color">
-                Change background
+                aria-label="Toggle theme">
+                Light Theme
             </button>
         </nav>
     </header>
@@ -40,7 +40,7 @@
     <main>
         <div class="container">
             <h1 class="section-title">My Favorites</h1>
-            <p style="color: #94a3b8; margin-bottom: 25px;">Saved movies to watch later.</p>
+            <p id="favorites-count-msg" style="color: #94a3b8; margin-bottom: 25px;">Saved movies to watch later (<span id="fav-count">3</span> movies).</p>
 
             <h3 style="color: #f8fafc; margin-bottom: 10px; font-size: 1.1rem;">Watch Priority Order:</h3>
             <ol class="custom-ol">
@@ -50,13 +50,13 @@
             </ol>
 
             <!-- Flexbox is used for this card row as required by Task 2. -->
-            <div class="card-row">
+            <div class="card-row" id="favorites-container">
                 <div class="movie-card">
                     <button type="button" class="fav-btn-active">★</button>
                     <img src="images/avatar.jpg" alt="Avatar">
                     <div class="movie-info">
                         <div><h3>Avatar: Fire and Ash</h3><p>Sci-Fi / Adventure</p></div>
-                        <button class="btn" type="button" style="margin-top: 10px; padding: 6px 12px; font-size: 0.85rem; background: #233044; color: #cbd5e1;">Remove</button>
+                        <button class="btn remove-fav-btn" type="button" style="margin-top: 10px; padding: 6px 12px; font-size: 0.85rem; background: #233044; color: #cbd5e1;">Remove</button>
                     </div>
                 </div>
                 <div class="movie-card">
@@ -64,7 +64,7 @@
                     <img src="images/superman.jpg" alt="Superman">
                     <div class="movie-info">
                         <div><h3>Superman</h3><p>Action / Superhero</p></div>
-                        <button class="btn" type="button" style="margin-top: 10px; padding: 6px 12px; font-size: 0.85rem; background: #233044; color: #cbd5e1;">Remove</button>
+                        <button class="btn remove-fav-btn" type="button" style="margin-top: 10px; padding: 6px 12px; font-size: 0.85rem; background: #233044; color: #cbd5e1;">Remove</button>
                     </div>
                 </div>
                 <div class="movie-card">
@@ -72,7 +72,7 @@
                     <img src="images/mickey17.jpg" alt="Mickey 17">
                     <div class="movie-info">
                         <div><h3>Mickey 17</h3><p>Sci-Fi / Mystery</p></div>
-                        <button class="btn" type="button" style="margin-top: 10px; padding: 6px 12px; font-size: 0.85rem; background: #233044; color: #cbd5e1;">Remove</button>
+                        <button class="btn remove-fav-btn" type="button" style="margin-top: 10px; padding: 6px 12px; font-size: 0.85rem; background: #233044; color: #cbd5e1;">Remove</button>
                     </div>
                 </div>
             </div>
@@ -92,8 +92,5 @@
     </footer>
 </div>
     <script src="js/assignment.js"></script>
-</body>
-</html>
-
 </body>
 </html>

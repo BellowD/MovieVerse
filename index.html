@@ -23,8 +23,8 @@
                 type="button"
                 class="theme-toggle"
                 id="change-background"
-                aria-label="Change background color">
-                Change background
+                aria-label="Toggle theme">
+                Light Theme
             </button>
         </nav>
     </header>
@@ -41,11 +41,25 @@
 
     <main>
         <div class="container">
+            <!-- Dynamic greeting based on time of day -->
+            <div class="greeting-box">
+                <span id="time-greeting" class="greeting-text">Welcome to MovieVerse!</span>
+                <span id="greeting-subtitle" style="color: #94a3b8; font-size: 0.9rem;">Explore our curated movie collection</span>
+            </div>
+
+            <!-- Genre filter using switch statement -->
+            <div class="filter-bar">
+                <span>Filter by Genre:</span>
+                <button type="button" class="filter-btn active" data-genre="all">All</button>
+                <button type="button" class="filter-btn" data-genre="scifi">Sci-Fi</button>
+                <button type="button" class="filter-btn" data-genre="action">Action</button>
+            </div>
+
             <section id="popular">
                 <h1 class="section-title">Popular Movies</h1>
 
                 <div class="card-row">
-                    <div class="movie-card">
+                    <div class="movie-card" data-genre="scifi">
                         <button type="button" class="fav-btn"
                                 title="Add to favorites">★</button>
                         <img src="images/avatar.jpg" alt="Avatar: Fire and Ash">
@@ -57,7 +71,7 @@
                         </div>
                     </div>
 
-                    <div class="movie-card">
+                    <div class="movie-card" data-genre="action">
                         <button type="button" class="fav-btn"
                                 title="Add to favorites">★</button>
                         <img src="images/superman.jpg" alt="Superman">
@@ -69,7 +83,7 @@
                         </div>
                     </div>
 
-                    <div class="movie-card">
+                    <div class="movie-card" data-genre="scifi">
                         <button type="button" class="fav-btn"
                                 title="Add to favorites">★</button>
                         <img src="images/mickey17.jpg" alt="Mickey 17">
@@ -87,7 +101,7 @@
                 <h2 class="section-title">Action Movies</h2>
 
                 <div class="card-row">
-                    <div class="movie-card">
+                    <div class="movie-card" data-genre="action">
                         <button type="button" class="fav-btn"
                                 title="Add to favorites">★</button>
                         <img src="images/mission.jpg"
@@ -100,7 +114,7 @@
                         </div>
                     </div>
 
-                    <div class="movie-card">
+                    <div class="movie-card" data-genre="action">
                         <button type="button" class="fav-btn"
                                 title="Add to favorites">★</button>
                         <img src="images/thunderbolts.jpg" alt="Thunderbolts">
@@ -112,7 +126,7 @@
                         </div>
                     </div>
 
-                    <div class="movie-card">
+                    <div class="movie-card" data-genre="action">
                         <button type="button" class="fav-btn"
                                 title="Add to favorites">★</button>
                         <img src="images/gorge.jpg" alt="The Gorge">
@@ -203,6 +217,15 @@
                         </div>
                     </div>
                 </div>
+            </section>
+
+            <!-- Dynamic movie quote box (Objects, Arrays, Loops) -->
+            <section class="quote-box" id="quote-section">
+                <h2 class="section-title">Movie Quote of the Day</h2>
+                <div class="quote-content" id="quote-display">
+                    <p id="quote-text">"I see you." — <strong id="quote-movie" style="color: #38bdf8;">Avatar</strong></p>
+                </div>
+                <button type="button" id="new-quote-btn" class="btn">Get New Quote</button>
             </section>
 
             <section id="team" class="team-box">
