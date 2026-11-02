@@ -7,8 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieVerse - Profile</title>
     <link rel="stylesheet" href="css/style.css">
+    <!-- Assignment 6: jQuery CDN & Script -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-4.0.0.min.js"><\/script>')</script>
+    <script src="js/script.js"></script>
 </head>
 <body>
+    <!-- Task 4: Scroll Progress Bar -->
+    <div id="scroll-progress-bar"></div>
+    <!-- Task 7: Toast Notifications Container -->
+    <div id="toast-container"></div>
 <div class="page-layout">
     <header id="main-header">
         <nav class="nav-menu">
@@ -46,7 +54,11 @@
                      class="profile-img">
                 <div class="profile-info">
                     <h1>Kairat_Nurtas</h1>
-                    <p class="email">kairat67@gmail.com</p>
+                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                        <p class="email" id="profile-email-text" style="margin-bottom: 0;">kairat67@gmail.com</p>
+                        <!-- Task 8: Copy to Clipboard Button -->
+                        <button type="button" class="copy-btn" data-copy-target="#profile-email-text" title="Copy email address">Copy Email</button>
+                    </div>
                 </div>
             </section>
 

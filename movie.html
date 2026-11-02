@@ -7,8 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieVerse - Search &amp; Movie</title>
     <link rel="stylesheet" href="css/style.css">
+    <!-- Assignment 6: jQuery CDN & Script -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-4.0.0.min.js"><\/script>')</script>
+    <script src="js/script.js"></script>
 </head>
 <body>
+    <!-- Task 4: Scroll Progress Bar -->
+    <div id="scroll-progress-bar"></div>
+    <!-- Task 7: Toast Notifications Container -->
+    <div id="toast-container"></div>
 <div class="page-layout">
     <header id="main-header">
         <nav class="nav-menu">
@@ -42,56 +50,120 @@
         <div class="container">
             <h1 class="section-title">Search Movies</h1>
 
-            <form action="movie.html" method="GET" class="search-box">
-                <input type="text" name="query" value="Mickey 17"
-                       placeholder="Search by title...">
+            <!-- Tasks 1, 2, 3: jQuery Real-Time Search, Autocomplete & Highlighting -->
+            <form action="movie.html" method="GET" class="search-box" onsubmit="event.preventDefault();">
+                <div class="search-wrapper">
+                    <input type="text" id="movie-search-input" name="query" value=""
+                           placeholder="Type to search movies, genres, or FAQ topics..." autocomplete="off">
+                    <ul id="search-suggestions" class="autocomplete-dropdown"></ul>
+                </div>
                 <button type="submit" class="btn">Search</button>
             </form>
 
             <p style="margin-bottom: 20px; color: #94a3b8;">
                 Results for:
-                <strong style="color: #f8fafc;" class="mickey2">
-                    "Mickey 17"
+                <strong style="color: #f8fafc;" id="search-query-display">
+                    "All Movies"
                 </strong>
-                (Found 1 match)
+                <span id="search-count-display">(Found 4 matches)</span>
             </p>
 
-            <div class="movie-result-card">
-                <img src="images/mickey17.jpg" alt="Mickey 17"
-                     class="movie-result-poster">
+            <div class="search-results-list" style="display: flex; flex-direction: column; gap: 20px;">
+                <!-- Movie 1 -->
+                <div class="search-movie-item movie-result-card">
+                    <img src="images/mickey17.jpg" alt="Mickey 17"
+                         class="movie-result-poster">
 
-                <div class="movie-result-details">
-                    <div>
-                        <h2 class="mickey">Mickey 17 (2025)</h2>
-                        <span class="movie-badge">Sci-Fi / Adventure</span>
-                        <p class="movie-desc">
-                            Mickey 17 is an employee sent to colonize a
-                            freezing world. Whenever he dies, a new clone
-                            is created with his memories.
-                            <span id="more-text" style="display: none;">
-                                In this sci-fi thriller directed by Bong Joon-ho, Mickey Barnes faces impossible odds on an ice world, until he accidentally meets another clone of himself who is determined to survive.
-                            </span>
-                        </p>
-                        <!-- Read More toggle button -->
-                        <button type="button" id="read-more-btn" class="read-more-btn">Read More</button>
-                    </div>
+                    <div class="movie-result-details">
+                        <div>
+                            <h2 class="movie-title searchable-text mickey">Mickey 17 (2025)</h2>
+                            <span class="movie-badge">Sci-Fi / Adventure</span>
+                            <p class="movie-desc searchable-text">
+                                Mickey 17 is an employee sent to colonize a
+                                freezing world. Whenever he dies, a new clone
+                                is created with his memories.
+                                <span id="more-text" style="display: none;">
+                                    In this sci-fi thriller directed by Bong Joon-ho, Mickey Barnes faces impossible odds on an ice world, until he accidentally meets another clone of himself who is determined to survive.
+                                </span>
+                            </p>
+                            <!-- Read More toggle button -->
+                            <button type="button" id="read-more-btn" class="read-more-btn">Read More</button>
+                        </div>
 
-                    <!-- Interactive star rating widget -->
-                    <div class="rating-widget" id="movie-rating-widget">
-                        <span class="rating-title">Your Rating:</span>
-                        <div class="stars-row" id="movie-stars">
-                            <span class="star-rating-item" data-rating="1" title="1 star">★</span>
-                            <span class="star-rating-item" data-rating="2" title="2 stars">★</span>
-                            <span class="star-rating-item" data-rating="3" title="3 stars">★</span>
-                            <span class="star-rating-item" data-rating="4" title="4 stars">★</span>
-                            <span class="star-rating-item" data-rating="5" title="5 stars">★</span>
-                            <span id="rating-score-text" class="rating-score">Click a star to rate</span>
+                        <!-- Interactive star rating widget -->
+                        <div class="rating-widget" id="movie-rating-widget">
+                            <span class="rating-title">Your Rating:</span>
+                            <div class="stars-row" id="movie-stars">
+                                <span class="star-rating-item" data-rating="1" title="1 star">★</span>
+                                <span class="star-rating-item" data-rating="2" title="2 stars">★</span>
+                                <span class="star-rating-item" data-rating="3" title="3 stars">★</span>
+                                <span class="star-rating-item" data-rating="4" title="4 stars">★</span>
+                                <span class="star-rating-item" data-rating="5" title="5 stars">★</span>
+                                <span id="rating-score-text" class="rating-score">Click a star to rate</span>
+                            </div>
+                        </div>
+
+                        <div class="actions-row">
+                            <button class="btn" type="button" id="watch-now-btn">Watch Now</button>
+                            <span id="watch-feedback" style="display: none; color: #38bdf8; align-self: center; font-size: 0.9rem;">Starting movie player...</span>
                         </div>
                     </div>
+                </div>
 
-                    <div class="actions-row">
-                        <button class="btn" type="button" id="watch-now-btn">Watch Now</button>
-                        <span id="watch-feedback" style="display: none; color: #38bdf8; align-self: center; font-size: 0.9rem;">Starting movie player...</span>
+                <!-- Movie 2 -->
+                <div class="search-movie-item movie-result-card">
+                    <img src="images/avatar.jpg" alt="Avatar: Fire and Ash"
+                         class="movie-result-poster">
+
+                    <div class="movie-result-details">
+                        <div>
+                            <h2 class="movie-title searchable-text">Avatar: Fire and Ash (2026)</h2>
+                            <span class="movie-badge">Sci-Fi / Adventure</span>
+                            <p class="movie-desc searchable-text">
+                                Jake Sully and Neytiri encounter an aggressive new Na'vi volcanic tribe known as the Ash People on Pandora.
+                            </p>
+                        </div>
+                        <div class="actions-row">
+                            <button class="btn" type="button">Watch Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Movie 3 -->
+                <div class="search-movie-item movie-result-card">
+                    <img src="images/superman.jpg" alt="Superman"
+                         class="movie-result-poster">
+
+                    <div class="movie-result-details">
+                        <div>
+                            <h2 class="movie-title searchable-text">Superman (2025)</h2>
+                            <span class="movie-badge">Action / Superhero</span>
+                            <p class="movie-desc searchable-text">
+                                Clark Kent reconciles his heritage with his human upbringing, embodying truth and justice in a world that views kindness as old-fashioned.
+                            </p>
+                        </div>
+                        <div class="actions-row">
+                            <button class="btn" type="button">Watch Now</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Movie 4 -->
+                <div class="search-movie-item movie-result-card">
+                    <img src="images/mission.jpg" alt="Mission: Impossible"
+                         class="movie-result-poster">
+
+                    <div class="movie-result-details">
+                        <div>
+                            <h2 class="movie-title searchable-text">Mission: Impossible - The Final Reckoning</h2>
+                            <span class="movie-badge">Action / Spy Thriller</span>
+                            <p class="movie-desc searchable-text">
+                                Ethan Hunt and the IMF team confront an all-powerful artificial intelligence known as the Entity in their ultimate global mission.
+                            </p>
+                        </div>
+                        <div class="actions-row">
+                            <button class="btn" type="button">Watch Now</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -107,7 +179,7 @@
                 <div class="faq-item"
                      style="margin-bottom: 12px; border-radius: 8px;
                      overflow: hidden; background: #161f30;">
-                    <button type="button" class="faq-question"
+                    <button type="button" class="faq-question searchable-text"
                             aria-expanded="false"
                             style="width: 100%; padding: 15px;
                             display: flex; justify-content: space-between;
@@ -122,7 +194,7 @@
                          padding: 0 15px; opacity: 0;
                          transition: max-height 0.35s ease,
                          padding 0.35s ease, opacity 0.35s ease;">
-                        <p>
+                        <p class="searchable-text">
                             MovieVerse is a website where users can explore
                             movies, discover popular titles, and find
                             information about films.
@@ -133,7 +205,7 @@
                 <div class="faq-item"
                      style="margin-bottom: 12px; border-radius: 8px;
                      overflow: hidden; background: #161f30;">
-                    <button type="button" class="faq-question"
+                    <button type="button" class="faq-question searchable-text"
                             aria-expanded="false"
                             style="width: 100%; padding: 15px;
                             display: flex; justify-content: space-between;
@@ -148,7 +220,7 @@
                          padding: 0 15px; opacity: 0;
                          transition: max-height 0.35s ease,
                          padding 0.35s ease, opacity 0.35s ease;">
-                        <p>
+                        <p class="searchable-text">
                             Mickey 17 follows an expendable worker on a
                             dangerous mission to colonize a frozen planet.
                             When he dies, another version of him is created.
@@ -159,7 +231,7 @@
                 <div class="faq-item"
                      style="margin-bottom: 12px; border-radius: 8px;
                      overflow: hidden; background: #161f30;">
-                    <button type="button" class="faq-question"
+                    <button type="button" class="faq-question searchable-text"
                             aria-expanded="false"
                             style="width: 100%; padding: 15px;
                             display: flex; justify-content: space-between;
@@ -174,7 +246,7 @@
                          padding: 0 15px; opacity: 0;
                          transition: max-height 0.35s ease,
                          padding 0.35s ease, opacity 0.35s ease;">
-                        <p>
+                        <p class="searchable-text">
                             MovieVerse includes movie categories such as
                             science fiction, adventure, action, thriller,
                             and drama.

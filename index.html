@@ -7,8 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieVerse - Main Menu</title>
     <link rel="stylesheet" href="css/style.css">
+    <!-- Assignment 6: jQuery CDN & Script -->
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-4.0.0.min.js"><\/script>')</script>
+    <script src="js/script.js"></script>
 </head>
 <body>
+    <!-- Task 4: Scroll Progress Bar -->
+    <div id="scroll-progress-bar"></div>
+    <!-- Task 7: Toast Notifications Container -->
+    <div id="toast-container"></div>
 <div class="page-layout">
     <header id="main-header">
         <nav class="nav-menu">
@@ -46,6 +54,26 @@
                 <span id="time-greeting" class="greeting-text">Welcome to MovieVerse!</span>
                 <span id="greeting-subtitle" style="color: #94a3b8; font-size: 0.9rem;">Explore our curated movie collection</span>
             </div>
+
+            <!-- Task 5: Animated Statistics Counter -->
+            <section class="stats-section">
+                <div class="stat-card">
+                    <div class="counter-value" data-target="1500" data-suffix="+">0</div>
+                    <div class="stat-label">Movies Available</div>
+                </div>
+                <div class="stat-card">
+                    <div class="counter-value" data-target="85" data-suffix="K+">0</div>
+                    <div class="stat-label">Active Cinephiles</div>
+                </div>
+                <div class="stat-card">
+                    <div class="counter-value" data-target="98" data-suffix="%">0</div>
+                    <div class="stat-label">Positive Ratings</div>
+                </div>
+                <div class="stat-card">
+                    <div class="counter-value" data-target="24" data-suffix="/7">0</div>
+                    <div class="stat-label">Streaming Access</div>
+                </div>
+            </section>
 
             <!-- Genre filter using switch statement -->
             <div class="filter-bar">
@@ -145,7 +173,7 @@
 
                 <div class="gallery-grid">
                     <div class="gallery-item">
-                        <img src="images/avatar.jpg" alt="Avatar: Fire and Ash">
+                        <img class="lazy-load" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3C/svg%3E" data-src="images/avatar.jpg" alt="Avatar: Fire and Ash">
                         <div class="gallery-caption">
                             <strong>Avatar: Fire and Ash</strong>
                             <span>Sci-Fi / Adventure</span>
@@ -153,7 +181,7 @@
                     </div>
 
                     <div class="gallery-item">
-                        <img src="images/superman.jpg" alt="Superman">
+                        <img class="lazy-load" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3C/svg%3E" data-src="images/superman.jpg" alt="Superman">
                         <div class="gallery-caption">
                             <strong>Superman</strong>
                             <span>Action / Superhero</span>
@@ -161,7 +189,7 @@
                     </div>
 
                     <div class="gallery-item">
-                        <img src="images/mickey17.jpg" alt="Mickey 17">
+                        <img class="lazy-load" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3C/svg%3E" data-src="images/mickey17.jpg" alt="Mickey 17">
                         <div class="gallery-caption">
                             <strong>Mickey 17</strong>
                             <span>Sci-Fi / Mystery</span>
@@ -169,7 +197,7 @@
                     </div>
 
                     <div class="gallery-item">
-                        <img src="images/iswear.jpg" alt="I Swear">
+                        <img class="lazy-load" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3C/svg%3E" data-src="images/iswear.jpg" alt="I Swear">
                         <div class="gallery-caption">
                             <strong>I Swear</strong>
                             <span>Drama / Biography</span>
@@ -177,7 +205,7 @@
                     </div>
 
                     <div class="gallery-item">
-                        <img src="images/mission.jpg" alt="Mission: Impossible">
+                        <img class="lazy-load" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3C/svg%3E" data-src="images/mission.jpg" alt="Mission: Impossible">
                         <div class="gallery-caption">
                             <strong>Mission: Impossible</strong>
                             <span>Action / Spy</span>
@@ -185,7 +213,7 @@
                     </div>
 
                     <div class="gallery-item">
-                        <img src="images/thunderbolts.jpg" alt="Thunderbolts">
+                        <img class="lazy-load" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3C/svg%3E" data-src="images/thunderbolts.jpg" alt="Thunderbolts">
                         <div class="gallery-caption">
                             <strong>Thunderbolts*</strong>
                             <span>Action / Adventure</span>
@@ -193,7 +221,7 @@
                     </div>
 
                     <div class="gallery-item">
-                        <img src="images/gorge.jpg" alt="The Gorge">
+                        <img class="lazy-load" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3C/svg%3E" data-src="images/gorge.jpg" alt="The Gorge">
                         <div class="gallery-caption">
                             <strong>The Gorge</strong>
                             <span>Action / Romance</span>
@@ -201,7 +229,7 @@
                     </div>
 
                     <div class="gallery-item">
-                        <img src="images/jurassic.jpg"
+                        <img class="lazy-load" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3C/svg%3E" data-src="images/jurassic.jpg"
                              alt="Jurassic World: Rebirth">
                         <div class="gallery-caption">
                             <strong>Jurassic World: Rebirth</strong>
@@ -210,7 +238,7 @@
                     </div>
 
                     <div class="gallery-item">
-                        <img src="images/profile.jpg" alt="MovieVerse profile">
+                        <img class="lazy-load" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3C/svg%3E" data-src="images/profile.jpg" alt="MovieVerse profile">
                         <div class="gallery-caption">
                             <strong>MovieVerse Profile</strong>
                             <span>User profile image</span>
@@ -225,7 +253,11 @@
                 <div class="quote-content" id="quote-display">
                     <p id="quote-text">"I see you." — <strong id="quote-movie" style="color: #38bdf8;">Avatar</strong></p>
                 </div>
-                <button type="button" id="new-quote-btn" class="btn">Get New Quote</button>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button type="button" id="new-quote-btn" class="btn">Get New Quote</button>
+                    <!-- Task 8: Copy to Clipboard Button -->
+                    <button type="button" class="copy-btn" data-copy-target="#quote-text" title="Copy quote to clipboard">Copy Quote</button>
+                </div>
             </section>
 
             <section id="team" class="team-box">

@@ -348,6 +348,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const isLight = body.classList.toggle("light-theme");
             themeButton.textContent = isLight ? "Dark Theme" : "Light Theme";
             playSound();
+            if (window.showToast) {
+                window.showToast(isLight ? "Switched to Light Theme" : "Switched to Dark Theme");
+            }
         });
     }
 
@@ -622,6 +625,9 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 180);
 
             playSound();
+            if (window.showToast) {
+                window.showToast(isNowActive ? "Added to Favorites!" : "Removed from Favorites");
+            }
         });
     });
 
@@ -653,6 +659,9 @@ document.addEventListener("DOMContentLoaded", function () {
             card.style.transform = "scale(0.85)";
 
             playSound();
+            if (window.showToast) {
+                window.showToast("Movie removed from Favorites");
+            }
 
             setTimeout(function () {
                 card.remove();
