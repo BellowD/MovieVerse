@@ -58,9 +58,23 @@ window.MovieVerse = window.MovieVerse || {};
         }
     };
 
+    // User session & storage helpers (available across all pages)
+    MV.USERS_KEY = "movieverse_users";
+    MV.SESSION_KEY = "movieverse_session";
+
+    MV.getUsers = function () {
+        return MV.readJSON(MV.USERS_KEY, []);
+    };
+
+    MV.getCurrentUser = function () {
+        const sessionId = MV.readText(MV.SESSION_KEY);
+        if (!sessionId) return null;
+        return MV.getUsers().find(u => u.id === sessionId) || null;
+    };
+
     // ==========================================
     // 2. TACTILE UI SOUND EFFECTS (Web Audio API)
-    // Subtle, natural mechanical haptic clicks (non-arcade, non-synth)
+    // Clear, tactile, physical clicks (pleasant, grounded, audible)
     // ==========================================
     const AudioEngine = (function () {
         let ctx = null;
@@ -76,7 +90,16 @@ window.MovieVerse = window.MovieVerse || {};
             return ctx;
         }
 
-        function triggerMechanicalTap(pitch = 180, duration = 0.012, gainLevel = 0.035) {
+        function unlockAudio() {
+            const c = getContext();
+            if (c && c.state === "suspended") {
+                c.resume();
+            }
+        }
+        window.addEventListener("pointerdown", unlockAudio, { once: true });
+        window.addEventListener("keydown", unlockAudio, { once: true });
+
+        function triggerMechanicalTap(pitch = 360, duration = 0.035, gainLevel = 0.18) {
             if (isMuted) return;
             try {
                 const c = getContext();
@@ -85,10 +108,9 @@ window.MovieVerse = window.MovieVerse || {};
                 const osc = c.createOscillator();
                 const gain = c.createGain();
 
-                osc.type = "sine";
-                // Rapid frequency drop emulates physical switch transient
+                osc.type = "triangle";
                 osc.frequency.setValueAtTime(pitch, c.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(40, c.currentTime + duration);
+                osc.frequency.exponentialRampToValueAtTime(100, c.currentTime + duration);
 
                 gain.gain.setValueAtTime(gainLevel, c.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + duration);
@@ -105,14 +127,12 @@ window.MovieVerse = window.MovieVerse || {};
             play: function (soundName) {
                 if (isMuted) return;
                 if (soundName === "click") {
-                    triggerMechanicalTap(160, 0.012, 0.035);
+                    triggerMechanicalTap(340, 0.035, 0.16);
                 } else if (soundName === "success") {
-                    // Soft double micro-tap
-                    triggerMechanicalTap(180, 0.010, 0.03);
-                    setTimeout(() => triggerMechanicalTap(220, 0.010, 0.03), 45);
+                    triggerMechanicalTap(420, 0.03, 0.18);
+                    setTimeout(() => triggerMechanicalTap(520, 0.04, 0.18), 50);
                 } else if (soundName === "error") {
-                    // Muted low-frequency haptic thud
-                    triggerMechanicalTap(90, 0.025, 0.04);
+                    triggerMechanicalTap(160, 0.05, 0.20);
                 }
             },
             toggleMute: function () {

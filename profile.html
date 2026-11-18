@@ -47,8 +47,6 @@
                     <li><a href="movie.html">Search</a></li>
                     <li><a href="favorites.html">Favorites</a></li>
                     <li><a href="profile.html" class="active">Profile</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
                     <li class="nav-auth" id="nav-auth">
                         <a href="login.html">Log In</a>
                         <a href="signup.html" class="btn" style="padding: 5px 12px; font-size: 0.85rem;">Sign Up</a>
@@ -81,13 +79,22 @@
 
         <!-- Sidebar -->
         <aside class="sidebar">
-            <h2>User Account</h2>
-            <ul>
-                <li><a href="#overview">Profile Card</a></li>
-                <li><a href="#ratings-section">My Movie Ratings</a></li>
-                <li><a href="#settings-section">Profile Settings</a></li>
-                <li><a href="favorites.html">My Watchlist</a></li>
-            </ul>
+            <div class="sidebar-nav-group">
+                <h2>User Account</h2>
+                <ul>
+                    <li><a href="#overview">Profile Card</a></li>
+                    <li><a href="#ratings-section">My Movie Ratings</a></li>
+                    <li><a href="#settings-section">Profile Settings</a></li>
+                    <li><a href="favorites.html">My Watchlist</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-bottom">
+                <h3>Information</h3>
+                <ul>
+                    <li><a href="about.html">About MovieVerse</a></li>
+                    <li><a href="contact.html">Contact & Support</a></li>
+                </ul>
+            </div>
         </aside>
 
         <!-- Main Content -->
@@ -113,26 +120,10 @@
                     </div>
                 </section>
 
-                <!-- Activity Statistics -->
-                <section class="stats-section">
-                    <div class="stat-card">
-                        <div class="counter-value" id="profile-fav-count" style="font-size: 2rem;">0</div>
-                        <div class="stat-label">Saved in Watchlist</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="counter-value" id="profile-rating-count" style="font-size: 2rem;">0</div>
-                        <div class="stat-label">Rated Movies</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="counter-value" style="font-size: 2rem; color: var(--success);">Active</div>
-                        <div class="stat-label">Membership Status</div>
-                    </div>
-                </section>
-
                 <!-- Personal Movie Ratings Table -->
                 <section id="ratings-section" style="margin-bottom: 3.5rem;">
                     <div class="section-title">
-                        <h2>Personal Movie Ratings</h2>
+                        <h2>Personal Movie Ratings (Last 3 Rated)</h2>
                         <a href="movie.html" class="btn btn-secondary" style="font-size: 0.85rem; padding: 6px 14px;">+ Rate More Movies</a>
                     </div>
 

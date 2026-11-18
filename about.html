@@ -41,8 +41,6 @@
                     <li><a href="movie.html">Search</a></li>
                     <li><a href="favorites.html">Favorites</a></li>
                     <li><a href="profile.html">Profile</a></li>
-                    <li><a href="about.html" class="active">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
                     <li class="nav-auth" id="nav-auth">
                         <a href="login.html">Log In</a>
                         <a href="signup.html" class="btn" style="padding: 5px 12px; font-size: 0.85rem;">Sign Up</a>
@@ -58,13 +56,21 @@
 
         <!-- Sidebar -->
         <aside class="sidebar">
-            <h2>Project Guide</h2>
-            <ul>
-                <li><a href="#mission">Project Mission</a></li>
-                <li><a href="#audience">Target Audience</a></li>
-                <li><a href="#architecture">Tech Stack</a></li>
-                <li><a href="#team">Team & Roles</a></li>
-            </ul>
+            <div class="sidebar-nav-group">
+                <h2>Project Guide</h2>
+                <ul>
+                    <li><a href="#mission">Project Mission</a></li>
+                    <li><a href="#audience">Target Audience</a></li>
+                    <li><a href="#team">Team & Roles</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-bottom">
+                <h3>Information</h3>
+                <ul>
+                    <li><a href="about.html" class="active">About MovieVerse</a></li>
+                    <li><a href="contact.html">Contact & Support</a></li>
+                </ul>
+            </div>
         </aside>
 
         <!-- Main Content -->
@@ -108,56 +114,6 @@
                             <h3 style="color: var(--accent); margin-bottom: 0.5rem;">Cross-Device Users</h3>
                             <p style="font-size: 0.95rem; color: var(--text-secondary);">Users who access their film queue seamlessly from laptops, tablets, and smartphones with adaptive layouts.</p>
                         </div>
-                    </div>
-                </section>
-
-                <!-- Architecture & Tech Stack -->
-                <section id="architecture" style="margin-bottom: 3rem;">
-                    <div class="section-title">
-                        <h2>Architecture & Technologies</h2>
-                    </div>
-                    <div class="table-wrapper">
-                        <table class="ratings-table">
-                            <thead>
-                                <tr>
-                                    <th>Component</th>
-                                    <th>Implementation Details</th>
-                                    <th>Course Requirement Fit</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Layout & Styling</strong></td>
-                                    <td>Semantic HTML5, CSS Grid page areas, Flexbox component alignment, media queries (desktop, tablet, mobile).</td>
-                                    <td>Responsiveness (10 pts)</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Themes & Accents</strong></td>
-                                    <td>CSS custom variables (`--bg-base`, `--accent`), early `<head>` script preventing FOUC, light/dark switch.</td>
-                                    <td>Light & Dark Modes (5 pts)</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>API Integration</strong></td>
-                                    <td>OMDb API with key `7e7c63b6`, `async/await`, `fetch()`, request debouncing (350ms), loading spinners, error fallback.</td>
-                                    <td>External API Integration (10 pts)</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Simulated Auth</strong></td>
-                                    <td>Sign up, login, credential verification, and route guards all running in client `localStorage`.</td>
-                                    <td>JS Functionality (25 pts)</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Strict Validation</strong></td>
-                                    <td>Custom regex for email & KZ phones (`+7 7XX XXX XX XX`), password complexity, novalidate, zero HTML5 validation attributes.</td>
-                                    <td>Form Validation (25 pts)</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Audio Feedback</strong></td>
-                                    <td>Web Audio API oscillator tone synthesis (clicks, success, error) with mute control and no audio files.</td>
-                                    <td>UI Effects & Animations (5 pts)</td>
-                                </tr>
-                            </tbody>
-                        </table>
                     </div>
                 </section>
 

@@ -203,24 +203,19 @@ window.MovieVerse = window.MovieVerse || {};
         }
 
         function renderProfileStats() {
-            const favs = MV.favorites ? MV.favorites.getAll() : [];
             const ratings = MV.favorites ? MV.favorites.getRatings() : [];
-
-            const favCountEl = document.getElementById("profile-fav-count");
-            const ratingCountEl = document.getElementById("profile-rating-count");
-            if (favCountEl) favCountEl.textContent = favs.length;
-            if (ratingCountEl) ratingCountEl.textContent = ratings.length;
-
             const tableBody = document.getElementById("profile-ratings-table-body");
             if (!tableBody) return;
             tableBody.innerHTML = "";
 
-            if (ratings.length === 0) {
-                tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-muted); padding: 2rem;">No ratings recorded yet. <a href="movie.html" style="color: var(--accent);">Search movies to rate</a>.</td></tr>`;
+            if (!ratings || ratings.length === 0) {
+                tableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; color: var(--text-muted); padding: 2rem;">No rated movies yet. <a href="movie.html" style="color: var(--accent); font-weight: bold;">Search movies to rate</a>.</td></tr>`;
                 return;
             }
 
-            ratings.forEach(item => {
+            // Exactly the last 3 rated movies (newest first)
+            const recentThree = ratings.slice(0, 3);
+            recentThree.forEach(item => {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
                     <td><strong>${item.title || "Unknown"}</strong> ${item.year ? "(" + item.year + ")" : ""}</td>
@@ -296,6 +291,9 @@ window.MovieVerse = window.MovieVerse || {};
         }
 
         renderProfileView();
+        if (MV.favorites) {
+            document.addEventListener(MV.favorites.CHANGE_EVENT, renderProfileStats);
+        }
     }
 
     // ==========================================

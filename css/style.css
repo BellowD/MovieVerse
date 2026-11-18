@@ -31,11 +31,11 @@
     --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
     
-    /* Rugged, sharp angular corners */
-    --radius-sm: 2px;
-    --radius-md: 3px;
-    --radius-lg: 4px;
-    --radius-full: 2px;
+    /* Subtle rounded corners */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-full: 9999px;
     
     --transition-fast: 0.15s ease;
     --transition-normal: 0.2s ease;
@@ -364,7 +364,7 @@ html.light-theme .nav-links a:hover {
 .accent-swatch {
     width: 22px;
     height: 22px;
-    border-radius: 2px;
+    border-radius: 4px;
     border: 2px solid transparent;
     cursor: pointer;
 }
@@ -385,7 +385,31 @@ html.light-theme .nav-links a:hover {
     background-color: var(--bg-surface);
     border-right: 1px solid var(--border-color);
     padding: 2rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     transition: background-color var(--transition-normal), border-color var(--transition-normal);
+}
+
+.sidebar-nav-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.sidebar-bottom {
+    margin-top: 2rem;
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.sidebar-bottom h3 {
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.8rem;
+    font-weight: 700;
 }
 
 .sidebar h2 {
@@ -557,7 +581,7 @@ footer {
     border: 1px solid var(--border-color);
     color: var(--text-secondary);
     padding: 7px 16px;
-    border-radius: 2px;
+    border-radius: var(--radius-sm);
     font-size: 0.88rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -624,7 +648,7 @@ footer {
     right: 8px;
     width: 34px;
     height: 34px;
-    border-radius: 2px;
+    border-radius: var(--radius-sm);
     background-color: rgba(15, 23, 42, 0.85);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #e2e8f0;
@@ -680,8 +704,8 @@ footer {
 
 .badge {
     display: inline-block;
-    padding: 2px 8px;
-    border-radius: 2px;
+    padding: 3px 8px;
+    border-radius: 4px;
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
@@ -954,8 +978,8 @@ footer {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
     color: var(--text-secondary);
-    padding: 5px 12px;
-    border-radius: 2px;
+    padding: 6px 14px;
+    border-radius: var(--radius-sm);
     font-size: 0.85rem;
     font-weight: 600;
     cursor: pointer;

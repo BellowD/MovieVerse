@@ -31,7 +31,18 @@ window.MovieVerse.favorites = (function () {
     }
 
     function getAllRatings() {
-        return MV.readJSON(getRatingsKey(), []);
+        const key = getRatingsKey();
+        let list = MV.readJSON(key, []);
+        // If logged in but user has 0 ratings, check if guest has ratings and auto-merge
+        const user = MV.getCurrentUser ? MV.getCurrentUser() : null;
+        if (user && list.length === 0) {
+            const guestRatings = MV.readJSON("movieverse_ratings_guest", []);
+            if (guestRatings.length > 0) {
+                MV.writeJSON(key, guestRatings);
+                list = guestRatings;
+            }
+        }
+        return list;
     }
 
     function saveRatings(list) {

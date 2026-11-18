@@ -47,8 +47,6 @@
                     <li><a href="movie.html">Search</a></li>
                     <li><a href="favorites.html">Favorites</a></li>
                     <li><a href="profile.html">Profile</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
                     <li class="nav-auth" id="nav-auth">
                         <a href="login.html" class="active">Log In</a>
                         <a href="signup.html" class="btn" style="padding: 5px 12px; font-size: 0.85rem;">Sign Up</a>
@@ -64,13 +62,20 @@
 
         <!-- Sidebar -->
         <aside class="sidebar">
-            <h2>Authentication</h2>
-            <ul>
-                <li><a href="login.html" style="color: var(--accent);">Sign In</a></li>
-                <li><a href="signup.html">Create Account</a></li>
-                <li><a href="about.html">About MovieVerse</a></li>
-                <li><a href="contact.html">Help & Support</a></li>
-            </ul>
+            <div class="sidebar-nav-group">
+                <h2>Authentication</h2>
+                <ul>
+                    <li><a href="login.html" class="active" style="color: var(--accent);">Sign In</a></li>
+                    <li><a href="signup.html">Create Account</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-bottom">
+                <h3>Information</h3>
+                <ul>
+                    <li><a href="about.html">About MovieVerse</a></li>
+                    <li><a href="contact.html">Contact & Support</a></li>
+                </ul>
+            </div>
         </aside>
 
         <!-- Main Content -->
@@ -141,9 +146,20 @@
                         window.MovieVerse.writeJSON("movieverse_users", users);
                     }
 
+                    // Pre-seed exactly 3 rated movies for the demo user
+                    const userRatKey = "movieverse_ratings_" + demoUser.id;
+                    const demoRatings = window.MovieVerse.readJSON(userRatKey, []);
+                    if (demoRatings.length === 0) {
+                        window.MovieVerse.writeJSON(userRatKey, [
+                            { id: "tt0816692", title: "Interstellar", year: "2014", genre: "Adventure, Sci-Fi", rating: 5, ratedAt: new Date(Date.now() - 3600000).toISOString() },
+                            { id: "tt1375666", title: "Inception", year: "2010", genre: "Action, Sci-Fi", rating: 5, ratedAt: new Date(Date.now() - 7200000).toISOString() },
+                            { id: "tt0468569", title: "The Dark Knight", year: "2008", genre: "Action, Crime", rating: 5, ratedAt: new Date(Date.now() - 10800000).toISOString() }
+                        ]);
+                    }
+
                     document.getElementById("login-email").value = demoUser.email;
                     document.getElementById("login-password").value = demoUser.password;
-                    window.MovieVerse.showToast("Demo credentials filled!");
+                    window.MovieVerse.showToast("Demo credentials and 3 rated movies loaded!");
                 });
             }
         });

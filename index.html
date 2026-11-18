@@ -42,8 +42,6 @@
                     <li><a href="movie.html">Search</a></li>
                     <li><a href="favorites.html">Favorites</a></li>
                     <li><a href="profile.html">Profile</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
                     <li class="nav-auth" id="nav-auth">
                         <a href="login.html">Log In</a>
                         <a href="signup.html" class="btn" style="padding: 5px 12px; font-size: 0.85rem;">Sign Up</a>
@@ -76,51 +74,27 @@
 
         <!-- Sidebar Navigation -->
         <aside class="sidebar">
-            <h2>Navigation</h2>
-            <ul>
-                <li><a href="#hero">Overview</a></li>
-                <li><a href="#stats">Community Stats</a></li>
-                <li><a href="#collection">Curated Collection</a></li>
-                <li><a href="#quote-section">Quote of the Day</a></li>
-                <li><a href="movie.html">Live OMDb Search</a></li>
-                <li><a href="favorites.html">Watchlist</a></li>
-            </ul>
+            <div class="sidebar-nav-group">
+                <h2>Navigation</h2>
+                <ul>
+                    <li><a href="#collection">Curated Collection</a></li>
+                    <li><a href="#quote-section">Quote of the Day</a></li>
+                    <li><a href="movie.html">Live Search</a></li>
+                    <li><a href="favorites.html">Watchlist</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-bottom">
+                <h3>Information</h3>
+                <ul>
+                    <li><a href="about.html">About MovieVerse</a></li>
+                    <li><a href="contact.html">Contact & Support</a></li>
+                </ul>
+            </div>
         </aside>
 
         <!-- Main Content Body -->
         <main>
             <div class="container">
-                <!-- Greeting & Hero Banner -->
-                <section class="greeting-box" id="hero">
-                    <span id="time-greeting" class="greeting-text">Welcome to MovieVerse!</span>
-                    <span class="greeting-subtitle">Explore a handpicked universe of legendary masterpieces and search thousands of films worldwide with live API integration.</span>
-                    <div class="button-row">
-                        <a href="movie.html" class="btn">Search Online Database</a>
-                        <a href="favorites.html" class="btn btn-secondary">My Favorites</a>
-                        <a href="signup.html" class="btn btn-secondary">Join Community</a>
-                    </div>
-                </section>
-
-                <!-- Animated Community Statistics -->
-                <section class="stats-section" id="stats">
-                    <div class="stat-card">
-                        <div class="counter-value" data-target="1500" data-suffix="+">0</div>
-                        <div class="stat-label">Movies in Database</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="counter-value" data-target="85" data-suffix="K+">0</div>
-                        <div class="stat-label">Active Cinephiles</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="counter-value" data-target="98" data-suffix="%">0</div>
-                        <div class="stat-label">Positive Feedback</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="counter-value" data-target="24" data-suffix="/7">0</div>
-                        <div class="stat-label">Real-Time Sync</div>
-                    </div>
-                </section>
-
                 <!-- Filter Bar -->
                 <section id="collection">
                     <div class="section-title">
