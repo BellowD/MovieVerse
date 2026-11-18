@@ -1,10 +1,10 @@
-# 🎬 MovieVerse — Final Web Project
+# MovieVerse — Final Web Project
 
 MovieVerse is an interactive multi-page movie web platform built with semantic HTML5, modern CSS3 (Flexbox & CSS Grid), vanilla JavaScript (ES6+), and local jQuery. The application integrates with the live **OMDb Public API** to provide search across thousands of international movies and TV shows, personal watchlist curation with priority queue reordering, 1–5 star ratings, and simulated authentication using client-side `localStorage`.
 
 ---
 
-## 📌 Project Overview
+##  Project Overview
 
 - **Project Title:** MovieVerse
 - **Course:** Web Development (Final Exam Project)
@@ -16,7 +16,7 @@ MovieVerse is an interactive multi-page movie web platform built with semantic H
 
 ---
 
-## 🚀 Key Features & Requirements Alignment
+##  Key Features & Requirements Alignment
 
 | Requirement | Points | Implementation in MovieVerse |
 |---|---|---|
@@ -33,7 +33,7 @@ MovieVerse is an interactive multi-page movie web platform built with semantic H
 
 ---
 
-## 📁 Project File Structure
+##  Project File Structure
 
 ```text
 MovieVerse/
@@ -61,7 +61,7 @@ MovieVerse/
 
 ---
 
-## 💻 How to Run Locally
+##  How to Run Locally
 
 You can open the static HTML files directly in any modern browser, or serve them locally:
 
@@ -77,7 +77,7 @@ Or using the VS Code **Live Server** extension on `index.html`.
 
 ---
 
-## 🌐 Online Links
+##  Online Links
 
 - **GitHub Repository:** [https://github.com/BellowD/MovieVerse](https://github.com/BellowD/MovieVerse)
 - **Live Website:** [https://bellowd.github.io/MovieVerse/](https://bellowd.github.io/MovieVerse/)

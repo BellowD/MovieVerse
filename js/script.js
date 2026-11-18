@@ -59,7 +59,8 @@ window.MovieVerse = window.MovieVerse || {};
     };
 
     // ==========================================
-    // 2. SYNTHESIZED SOUND EFFECTS (Web Audio API)
+    // 2. TACTILE UI SOUND EFFECTS (Web Audio API)
+    // Subtle, natural mechanical haptic clicks (non-arcade, non-synth)
     // ==========================================
     const AudioEngine = (function () {
         let ctx = null;
@@ -75,7 +76,7 @@ window.MovieVerse = window.MovieVerse || {};
             return ctx;
         }
 
-        function playTone(freq, duration, type = "sine", gainVal = 0.08) {
+        function triggerMechanicalTap(pitch = 180, duration = 0.012, gainLevel = 0.035) {
             if (isMuted) return;
             try {
                 const c = getContext();
@@ -84,16 +85,18 @@ window.MovieVerse = window.MovieVerse || {};
                 const osc = c.createOscillator();
                 const gain = c.createGain();
 
-                osc.type = type;
-                osc.frequency.setValueAtTime(freq, c.currentTime);
+                osc.type = "sine";
+                // Rapid frequency drop emulates physical switch transient
+                osc.frequency.setValueAtTime(pitch, c.currentTime);
+                osc.frequency.exponentialRampToValueAtTime(40, c.currentTime + duration);
 
-                gain.gain.setValueAtTime(gainVal, c.currentTime);
+                gain.gain.setValueAtTime(gainLevel, c.currentTime);
                 gain.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + duration);
 
                 osc.connect(gain);
                 gain.connect(c.destination);
 
-                osc.start();
+                osc.start(c.currentTime);
                 osc.stop(c.currentTime + duration);
             } catch (e) {}
         }
@@ -102,14 +105,14 @@ window.MovieVerse = window.MovieVerse || {};
             play: function (soundName) {
                 if (isMuted) return;
                 if (soundName === "click") {
-                    playTone(600, 0.05, "triangle", 0.05);
+                    triggerMechanicalTap(160, 0.012, 0.035);
                 } else if (soundName === "success") {
-                    playTone(523.25, 0.1, "sine", 0.08); // C5
-                    setTimeout(() => playTone(659.25, 0.15, "sine", 0.08), 80); // E5
-                    setTimeout(() => playTone(783.99, 0.25, "sine", 0.08), 160); // G5
+                    // Soft double micro-tap
+                    triggerMechanicalTap(180, 0.010, 0.03);
+                    setTimeout(() => triggerMechanicalTap(220, 0.010, 0.03), 45);
                 } else if (soundName === "error") {
-                    playTone(250, 0.15, "sawtooth", 0.08);
-                    setTimeout(() => playTone(180, 0.2, "sawtooth", 0.08), 120);
+                    // Muted low-frequency haptic thud
+                    triggerMechanicalTap(90, 0.025, 0.04);
                 }
             },
             toggleMute: function () {
@@ -248,7 +251,7 @@ window.MovieVerse = window.MovieVerse || {};
         if (user) {
             const firstName = user.name ? user.name.split(" ")[0] : "Account";
             authSlot.innerHTML = `
-                <a href="profile.html" style="color: var(--accent); font-weight: bold;">👤 ${firstName}</a>
+                <a href="profile.html" style="color: var(--accent); font-weight: bold;">${firstName}</a>
                 <button type="button" class="auth-logout" id="header-logout-btn">Log Out</button>
             `;
             const headerLogout = document.getElementById("header-logout-btn");

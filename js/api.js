@@ -139,7 +139,6 @@ window.MovieVerse = window.MovieVerse || {};
         if (statusContainer) {
             statusContainer.innerHTML = `
                 <div class="state-box">
-                    <p style="font-size: 2.5rem; margin-bottom: 0.5rem;">🎬</p>
                     <h3>No Matches Found</h3>
                     <p>${message}</p>
                     <button type="button" class="btn btn-secondary" id="retry-search-btn">Try Another Search</button>
@@ -161,7 +160,6 @@ window.MovieVerse = window.MovieVerse || {};
         if (statusContainer) {
             statusContainer.innerHTML = `
                 <div class="state-box is-error">
-                    <p style="font-size: 2.5rem; margin-bottom: 0.5rem;">⚠️</p>
                     <h3>Network Error</h3>
                     <p>${message}</p>
                     <button type="button" class="btn" id="retry-fetch-btn">Retry Request</button>
