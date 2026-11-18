@@ -1,104 +1,133 @@
-<!-- Created by Daurenbek Anuar -->
 <!DOCTYPE html>
+<!-- MovieVerse - Favorites Watchlist & Priority Management
+     Authors: Nurkhat Assan, Daurenbek Anuar
+     Group: SE-2514
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MovieVerse - Favorites</title>
+    <meta name="description" content="Manage your personal MovieVerse watchlist in priority order. Reorder queue, rate watched films, and track movie collection.">
+    <title>MovieVerse — Favorites</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- Assignment 6: jQuery CDN & Script -->
-    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery-4.0.0.min.js"><\/script>')</script>
-    <script src="js/script.js"></script>
+    <script>
+        try {
+            if (localStorage.getItem("movieverse-theme") === "light") {
+                document.documentElement.classList.add("light-theme");
+            }
+            var savedAccent = localStorage.getItem("movieverse-accent");
+            if (savedAccent) {
+                document.documentElement.setAttribute("data-accent", savedAccent);
+            }
+        } catch (e) {}
+    </script>
+    <script src="js/jquery-4.0.0.min.js" defer></script>
+    <script src="js/script.js" defer></script>
+    <script src="js/favorites.js" defer></script>
 </head>
 <body>
-    <!-- Task 4: Scroll Progress Bar -->
     <div id="scroll-progress-bar"></div>
-    <!-- Task 7: Toast Notifications Container -->
-    <div id="toast-container"></div>
-<div class="page-layout">
-    <header id="main-header">
-        <nav class="nav-menu">
-            <div class="logo">MovieVerse</div>
-            <ul class="nav-links">
-                <li><a href="index.html">Main Menu</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="movie.html">Search / Movie</a></li>
-                <li><a href="favorites.html">Favorites</a></li>
-            </ul>
-            <button
-                type="button"
-                class="theme-toggle"
-                id="change-background"
-                aria-label="Toggle theme">
-                Light Theme
-            </button>
-        </nav>
-    </header>
+    <div id="toast-container" aria-live="polite"></div>
 
-    <aside class="sidebar">
-        <h2>My Library</h2>
-        <ul>
-            <li><a href="favorites.html">Favorites</a></li>
-            <li><a href="index.html">Popular Movies</a></li>
-            <li><a href="profile.html">Profile</a></li>
-        </ul>
-    </aside>
-
-    <main>
-        <div class="container">
-            <h1 class="section-title">My Favorites</h1>
-            <p id="favorites-count-msg" style="color: #94a3b8; margin-bottom: 25px;">Saved movies to watch later (<span id="fav-count">3</span> movies).</p>
-
-            <h3 style="color: #f8fafc; margin-bottom: 10px; font-size: 1.1rem;">Watch Priority Order:</h3>
-            <ol class="custom-ol">
-                <li>Avatar: Fire and Ash (Highest Priority)</li>
-                <li>Mickey 17 (Weekend plan)</li>
-                <li>Superman (Upcoming)</li>
-            </ol>
-
-            <!-- Flexbox is used for this card row as required by Task 2. -->
-            <div class="card-row" id="favorites-container">
-                <div class="movie-card">
-                    <button type="button" class="fav-btn-active">★</button>
-                    <img src="images/avatar.jpg" alt="Avatar">
-                    <div class="movie-info">
-                        <div><h3>Avatar: Fire and Ash</h3><p>Sci-Fi / Adventure</p></div>
-                        <button class="btn remove-fav-btn" type="button" style="margin-top: 10px; padding: 6px 12px; font-size: 0.85rem; background: #233044; color: #cbd5e1;">Remove</button>
-                    </div>
-                </div>
-                <div class="movie-card">
-                    <button type="button" class="fav-btn-active">★</button>
-                    <img src="images/superman.jpg" alt="Superman">
-                    <div class="movie-info">
-                        <div><h3>Superman</h3><p>Action / Superhero</p></div>
-                        <button class="btn remove-fav-btn" type="button" style="margin-top: 10px; padding: 6px 12px; font-size: 0.85rem; background: #233044; color: #cbd5e1;">Remove</button>
-                    </div>
-                </div>
-                <div class="movie-card">
-                    <button type="button" class="fav-btn-active">★</button>
-                    <img src="images/mickey17.jpg" alt="Mickey 17">
-                    <div class="movie-info">
-                        <div><h3>Mickey 17</h3><p>Sci-Fi / Mystery</p></div>
-                        <button class="btn remove-fav-btn" type="button" style="margin-top: 10px; padding: 6px 12px; font-size: 0.85rem; background: #233044; color: #cbd5e1;">Remove</button>
-                    </div>
-                </div>
-            </div>
-
-            <section class="team-box">
-                <h2>About the Team</h2>
-                <ul>
-                    <li><strong>Nurkhat Assan:</strong> Main Menu & Profile</li>
-                    <li><strong>Daurenbek Anuar:</strong> Search & Favorites</li>
+    <div class="page-layout">
+        <!-- Header -->
+        <header id="main-header">
+            <nav class="nav-menu" aria-label="Main Navigation">
+                <a href="index.html" class="logo">
+                    🎬 Movie<span>Verse</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movie.html">Search</a></li>
+                    <li><a href="favorites.html" class="active">Favorites</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="nav-auth" id="nav-auth">
+                        <a href="login.html">Log In</a>
+                        <a href="signup.html" class="btn" style="padding: 5px 12px; font-size: 0.85rem;">Sign Up</a>
+                    </li>
                 </ul>
-            </section>
-        </div>
-    </main>
+                <div class="header-tools">
+                    <div class="accent-picker">
+                        <button type="button" class="tool-btn" id="accent-toggle" aria-label="Choose Accent Color" aria-expanded="false">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.5-.8 1.5-1.5 0-.9-.6-1.2-.6-2.1 0-.8.7-1.4 1.5-1.4H16a5 5 0 0 0 5-5c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg>
+                        </button>
+                        <div class="accent-panel" id="accent-panel" hidden>
+                            <div class="accent-options" role="group" aria-label="Accent color">
+                                <button type="button" class="accent-swatch" data-accent="sky" aria-label="Sky Accent" aria-pressed="true"></button>
+                                <button type="button" class="accent-swatch" data-accent="crimson" aria-label="Crimson Accent" aria-pressed="false"></button>
+                                <button type="button" class="accent-swatch" data-accent="gold" aria-label="Gold Accent" aria-pressed="false"></button>
+                                <button type="button" class="accent-swatch" data-accent="emerald" aria-label="Emerald Accent" aria-pressed="false"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="tool-btn" id="sound-toggle" aria-label="Toggle Sound Effects" aria-pressed="false">
+                        <svg class="icon-sound-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+                        <svg class="icon-sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="m16 9 6 6"/><path d="m22 9-6 6"/></svg>
+                    </button>
+                    <button type="button" class="theme-toggle" id="change-background" aria-label="Toggle Theme">
+                        Light Theme
+                    </button>
+                </div>
+            </nav>
+        </header>
 
-    <footer>
-        <p>MovieVerse &copy; 2026. Authors: Nurkhat Assan, Daurenbek Anuar.</p>
-    </footer>
-</div>
-    <script src="js/assignment.js"></script>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Watchlist</h2>
+            <ul>
+                <li><a href="favorites.html">⭐ All Favorites</a></li>
+                <li><a href="movie.html">🔍 Find More Movies</a></li>
+                <li><a href="index.html#collection">🎬 Featured Films</a></li>
+                <li><a href="profile.html">📊 Your Stats</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            <div class="container">
+                <div class="section-title">
+                    <h2>Your Watchlist & Priority Queue</h2>
+                    <span id="fav-counter-badge" class="badge">0 Movies</span>
+                </div>
+
+                <!-- Actions and Search Bar -->
+                <div style="display: flex; gap: 15px; margin-bottom: 2rem; flex-wrap: wrap; justify-content: space-between; align-items: center;">
+                    <div style="flex-grow: 1; max-width: 400px;">
+                        <input type="text" id="fav-search-input" placeholder="Search within your saved watchlist..."
+                               style="width: 100%; padding: 10px 16px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius-sm); color: var(--text-primary);">
+                    </div>
+                    <div class="button-row">
+                        <button type="button" id="clear-all-favs-btn" class="btn btn-secondary btn-danger" style="display: none;">
+                            🗑️ Clear All
+                        </button>
+                        <a href="movie.html" class="btn">
+                            ➕ Discover More
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Empty State -->
+                <div id="fav-empty-state" class="state-box" style="display: none;">
+                    <p style="font-size: 3rem; margin-bottom: 0.5rem;">🍿</p>
+                    <h3>Your Watchlist is Empty</h3>
+                    <p>You haven't added any movies to your favorites queue yet.</p>
+                    <div class="button-row" style="justify-content: center; margin-top: 1rem;">
+                        <a href="movie.html" class="btn">Search Online Movies</a>
+                        <a href="index.html#collection" class="btn btn-secondary">Explore Curated Titles</a>
+                    </div>
+                </div>
+
+                <!-- Favorites List Container -->
+                <div id="favorites-container" class="movie-grid"></div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>MovieVerse &copy; 2026. Authors: <strong>Nurkhat Assan</strong>, <strong>Daurenbek Anuar</strong>. Group: <strong>SE-2514</strong>.</p>
+        </footer>
+    </div>
 </body>
 </html>

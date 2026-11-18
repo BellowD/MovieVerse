@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<!-- MovieVerse - Log In
+     Authors: Nurkhat Assan, Daurenbek Anuar
+     Group: SE-2514
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sign in to your MovieVerse account to access your personal watchlist and rated movies.">
+    <title>MovieVerse — Log In</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        try {
+            if (localStorage.getItem("movieverse-theme") === "light") {
+                document.documentElement.classList.add("light-theme");
+            }
+            var savedAccent = localStorage.getItem("movieverse-accent");
+            if (savedAccent) {
+                document.documentElement.setAttribute("data-accent", savedAccent);
+            }
+            // If already logged in, redirect to profile
+            if (localStorage.getItem("movieverse_session")) {
+                window.location.replace("profile.html");
+            }
+        } catch (e) {}
+    </script>
+    <script src="js/jquery-4.0.0.min.js" defer></script>
+    <script src="js/script.js" defer></script>
+    <script src="js/validation.js" defer></script>
+    <script src="js/favorites.js" defer></script>
+    <script src="js/auth.js" defer></script>
+</head>
+<body>
+    <div id="scroll-progress-bar"></div>
+    <div id="toast-container" aria-live="polite"></div>
+
+    <div class="page-layout">
+        <!-- Header -->
+        <header id="main-header">
+            <nav class="nav-menu" aria-label="Main Navigation">
+                <a href="index.html" class="logo">
+                    🎬 Movie<span>Verse</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movie.html">Search</a></li>
+                    <li><a href="favorites.html">Favorites</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="nav-auth" id="nav-auth">
+                        <a href="login.html" class="active">Log In</a>
+                        <a href="signup.html" class="btn" style="padding: 5px 12px; font-size: 0.85rem;">Sign Up</a>
+                    </li>
+                </ul>
+                <div class="header-tools">
+                    <button type="button" class="theme-toggle" id="change-background" aria-label="Toggle Theme">
+                        Light Theme
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Authentication</h2>
+            <ul>
+                <li><a href="login.html" style="color: var(--accent);">🔑 Sign In</a></li>
+                <li><a href="signup.html">✨ Create Account</a></li>
+                <li><a href="about.html">ℹ️ About MovieVerse</a></li>
+                <li><a href="contact.html">📬 Help & Support</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            <div class="container">
+                <form id="login-form" class="form-card" novalidate>
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <h1 style="font-size: 2rem; color: var(--text-primary); margin-bottom: 0.5rem;">Welcome Back</h1>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Enter your credentials to access your watchlist and ratings</p>
+                    </div>
+
+                    <!-- General Login Error Box -->
+                    <div id="login-error" class="field-error" style="font-size: 0.95rem; margin-bottom: 1.5rem; justify-content: center;"></div>
+
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input type="text" id="login-email" name="email" inputmode="email" autocomplete="email" placeholder="name@example.com">
+                        <p class="field-hint">The email you used during registration.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" autocomplete="current-password" placeholder="••••••••">
+                    </div>
+
+                    <div style="margin-top: 2rem;">
+                        <button type="submit" class="btn" style="width: 100%; padding: 12px; font-size: 1rem;">Sign In to MovieVerse</button>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
+                        Don't have an account yet? <a href="signup.html" style="color: var(--accent); font-weight: 600;">Create one now</a>
+                    </div>
+
+                    <!-- Quick Demo Credentials helper for presentation -->
+                    <div style="margin-top: 2rem; padding: 1rem; background: rgba(56, 189, 248, 0.08); border: 1px dashed var(--accent); border-radius: var(--radius-sm); font-size: 0.85rem;">
+                        <strong style="color: var(--text-primary); display: block; margin-bottom: 4px;">💡 Presentation Demo:</strong>
+                        <span>Don't have an account yet? <button type="button" id="demo-fill-btn" style="background: none; border: none; color: var(--accent); text-decoration: underline; cursor: pointer; font-weight: bold;">Click here to load Demo User</button> (creates user and auto-fills credentials).</span>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>MovieVerse &copy; 2026. Authors: <strong>Nurkhat Assan</strong>, <strong>Daurenbek Anuar</strong>. Group: <strong>SE-2514</strong>.</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const demoBtn = document.getElementById("demo-fill-btn");
+            if (demoBtn) {
+                demoBtn.addEventListener("click", function () {
+                    const demoUser = {
+                        id: "user_demo",
+                        name: "Nurkhat Assan",
+                        email: "nurkhat@movieverse.kz",
+                        phone: "+7 701 555 77 99",
+                        password: "Password123!",
+                        favoriteGenre: "Sci-Fi",
+                        bio: "Web developer and cinema enthusiast. Creator of MovieVerse.",
+                        createdAt: new Date().toISOString()
+                    };
+
+                    const users = window.MovieVerse.readJSON("movieverse_users", []);
+                    if (!users.some(u => u.email === demoUser.email)) {
+                        users.push(demoUser);
+                        window.MovieVerse.writeJSON("movieverse_users", users);
+                    }
+
+                    document.getElementById("login-email").value = demoUser.email;
+                    document.getElementById("login-password").value = demoUser.password;
+                    window.MovieVerse.showToast("Demo credentials filled!");
+                });
+            }
+        });
+    </script>
+</body>
+</html>

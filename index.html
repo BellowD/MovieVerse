@@ -1,279 +1,544 @@
-
-<!-- Created by Nurkhat Assan -->
 <!DOCTYPE html>
+<!-- MovieVerse - Final Project
+     Authors: Nurkhat Assan, Daurenbek Anuar
+     Group: SE-2514
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MovieVerse - Main Menu</title>
+    <meta name="description" content="MovieVerse - Your personal universe of cinema. Discover curated movies, search real film data via OMDb API, save favorites, and share ratings.">
+    <title>MovieVerse — Home</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- Assignment 6: jQuery CDN & Script -->
-    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery-4.0.0.min.js"><\/script>')</script>
-    <script src="js/script.js"></script>
+    <script>
+        // Apply saved theme and accent before rendering to prevent FOUC (flash of unstyled content)
+        try {
+            if (localStorage.getItem("movieverse-theme") === "light") {
+                document.documentElement.classList.add("light-theme");
+            }
+            var savedAccent = localStorage.getItem("movieverse-accent");
+            if (savedAccent) {
+                document.documentElement.setAttribute("data-accent", savedAccent);
+            }
+        } catch (e) {}
+    </script>
+    <script src="js/jquery-4.0.0.min.js" defer></script>
+    <script src="js/script.js" defer></script>
+    <script src="js/favorites.js" defer></script>
 </head>
 <body>
-    <!-- Task 4: Scroll Progress Bar -->
     <div id="scroll-progress-bar"></div>
-    <!-- Task 7: Toast Notifications Container -->
-    <div id="toast-container"></div>
-<div class="page-layout">
-    <header id="main-header">
-        <nav class="nav-menu">
-            <div class="logo">MovieVerse</div>
-            <ul class="nav-links">
-                <li><a href="index.html">Main Menu</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="movie.html">Search / Movie</a></li>
-                <li><a href="favorites.html">Favorites</a></li>
-            </ul>
-            <button
-                type="button"
-                class="theme-toggle"
-                id="change-background"
-                aria-label="Toggle theme">
-                Light Theme
-            </button>
-        </nav>
-    </header>
+    <div id="toast-container" aria-live="polite"></div>
 
-    <aside class="sidebar">
-        <h2>MovieVerse</h2>
-        <ul>
-            <li><a href="#popular">Popular</a></li>
-            <li><a href="#action">Action</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#team">Team</a></li>
-        </ul>
-    </aside>
-
-    <main>
-        <div class="container">
-            <!-- Dynamic greeting based on time of day -->
-            <div class="greeting-box">
-                <span id="time-greeting" class="greeting-text">Welcome to MovieVerse!</span>
-                <span id="greeting-subtitle" style="color: #94a3b8; font-size: 0.9rem;">Explore our curated movie collection</span>
-            </div>
-
-            <!-- Task 5: Animated Statistics Counter -->
-            <section class="stats-section">
-                <div class="stat-card">
-                    <div class="counter-value" data-target="1500" data-suffix="+">0</div>
-                    <div class="stat-label">Movies Available</div>
-                </div>
-                <div class="stat-card">
-                    <div class="counter-value" data-target="85" data-suffix="K+">0</div>
-                    <div class="stat-label">Active Cinephiles</div>
-                </div>
-                <div class="stat-card">
-                    <div class="counter-value" data-target="98" data-suffix="%">0</div>
-                    <div class="stat-label">Positive Ratings</div>
-                </div>
-                <div class="stat-card">
-                    <div class="counter-value" data-target="24" data-suffix="/7">0</div>
-                    <div class="stat-label">Streaming Access</div>
-                </div>
-            </section>
-
-            <!-- Genre filter using switch statement -->
-            <div class="filter-bar">
-                <span>Filter by Genre:</span>
-                <button type="button" class="filter-btn active" data-genre="all">All</button>
-                <button type="button" class="filter-btn" data-genre="scifi">Sci-Fi</button>
-                <button type="button" class="filter-btn" data-genre="action">Action</button>
-            </div>
-
-            <section id="popular">
-                <h1 class="section-title">Popular Movies</h1>
-
-                <div class="card-row">
-                    <div class="movie-card" data-genre="scifi">
-                        <button type="button" class="fav-btn"
-                                title="Add to favorites">★</button>
-                        <img src="images/avatar.jpg" alt="Avatar: Fire and Ash">
-                        <div class="movie-info">
-                            <div>
-                                <h3>Avatar: Fire and Ash</h3>
-                                <p>Sci-Fi / Adventure</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="movie-card" data-genre="action">
-                        <button type="button" class="fav-btn"
-                                title="Add to favorites">★</button>
-                        <img src="images/superman.jpg" alt="Superman">
-                        <div class="movie-info">
-                            <div>
-                                <h3>Superman</h3>
-                                <p>Action / Superhero</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="movie-card" data-genre="scifi">
-                        <button type="button" class="fav-btn"
-                                title="Add to favorites">★</button>
-                        <img src="images/mickey17.jpg" alt="Mickey 17">
-                        <div class="movie-info">
-                            <div>
-                                <h3>Mickey 17</h3>
-                                <p>Sci-Fi / Mystery</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="action">
-                <h2 class="section-title">Action Movies</h2>
-
-                <div class="card-row">
-                    <div class="movie-card" data-genre="action">
-                        <button type="button" class="fav-btn"
-                                title="Add to favorites">★</button>
-                        <img src="images/mission.jpg"
-                             alt="Mission: Impossible - The Final Reckoning">
-                        <div class="movie-info">
-                            <div>
-                                <h3>Mission: Impossible</h3>
-                                <p>Spy Action / Thriller</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="movie-card" data-genre="action">
-                        <button type="button" class="fav-btn"
-                                title="Add to favorites">★</button>
-                        <img src="images/thunderbolts.jpg" alt="Thunderbolts">
-                        <div class="movie-info">
-                            <div>
-                                <h3>Thunderbolts*</h3>
-                                <p>Action / Adventure</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="movie-card" data-genre="action">
-                        <button type="button" class="fav-btn"
-                                title="Add to favorites">★</button>
-                        <img src="images/gorge.jpg" alt="The Gorge">
-                        <div class="movie-info">
-                            <div>
-                                <h3>The Gorge</h3>
-                                <p>Action / Romance / Thriller</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section id="gallery">
-                <h2 class="section-title">Movie Gallery</h2>
-
-                <div class="gallery-grid">
-                    <div class="gallery-item">
-                        <img class="lazy-load" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3C/svg%3E" data-src="images/avatar.jpg" alt="Avatar: Fire and Ash">
-                        <div class="gallery-caption">
-                            <strong>Avatar: Fire and Ash</strong>
-                            <span>Sci-Fi / Adventure</span>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item">
-                        <img class="lazy-load" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3C/svg%3E" data-src="images/superman.jpg" alt="Superman">
-                        <div class="gallery-caption">
-                            <strong>Superman</strong>
-                            <span>Action / Superhero</span>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item">
-                        <img class="lazy-load" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3C/svg%3E" data-src="images/mickey17.jpg" alt="Mickey 17">
-                        <div class="gallery-caption">
-                            <strong>Mickey 17</strong>
-                            <span>Sci-Fi / Mystery</span>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item">
-                        <img class="lazy-load" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3C/svg%3E" data-src="images/iswear.jpg" alt="I Swear">
-                        <div class="gallery-caption">
-                            <strong>I Swear</strong>
-                            <span>Drama / Biography</span>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item">
-                        <img class="lazy-load" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3C/svg%3E" data-src="images/mission.jpg" alt="Mission: Impossible">
-                        <div class="gallery-caption">
-                            <strong>Mission: Impossible</strong>
-                            <span>Action / Spy</span>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item">
-                        <img class="lazy-load" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3C/svg%3E" data-src="images/thunderbolts.jpg" alt="Thunderbolts">
-                        <div class="gallery-caption">
-                            <strong>Thunderbolts*</strong>
-                            <span>Action / Adventure</span>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item">
-                        <img class="lazy-load" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3C/svg%3E" data-src="images/gorge.jpg" alt="The Gorge">
-                        <div class="gallery-caption">
-                            <strong>The Gorge</strong>
-                            <span>Action / Romance</span>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item">
-                        <img class="lazy-load" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3C/svg%3E" data-src="images/jurassic.jpg"
-                             alt="Jurassic World: Rebirth">
-                        <div class="gallery-caption">
-                            <strong>Jurassic World: Rebirth</strong>
-                            <span>Action / Sci-Fi</span>
-                        </div>
-                    </div>
-
-                    <div class="gallery-item">
-                        <img class="lazy-load" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 400'%3E%3C/svg%3E" data-src="images/profile.jpg" alt="MovieVerse profile">
-                        <div class="gallery-caption">
-                            <strong>MovieVerse Profile</strong>
-                            <span>User profile image</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Dynamic movie quote box (Objects, Arrays, Loops) -->
-            <section class="quote-box" id="quote-section">
-                <h2 class="section-title">Movie Quote of the Day</h2>
-                <div class="quote-content" id="quote-display">
-                    <p id="quote-text">"I see you." — <strong id="quote-movie" style="color: #38bdf8;">Avatar</strong></p>
-                </div>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <button type="button" id="new-quote-btn" class="btn">Get New Quote</button>
-                    <!-- Task 8: Copy to Clipboard Button -->
-                    <button type="button" class="copy-btn" data-copy-target="#quote-text" title="Copy quote to clipboard">Copy Quote</button>
-                </div>
-            </section>
-
-            <section id="team" class="team-box">
-                <h2>About the Team</h2>
-                <ul>
-                    <li><strong>Nurkhat Assan:</strong> Main Menu &amp; Profile</li>
-                    <li><strong>Daurenbek Anuar:</strong> Search &amp; Favorites</li>
+    <div class="page-layout">
+        <!-- Main Navigation Header -->
+        <header id="main-header">
+            <nav class="nav-menu" aria-label="Main Navigation">
+                <a href="index.html" class="logo">
+                    🎬 Movie<span>Verse</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="movie.html">Search</a></li>
+                    <li><a href="favorites.html">Favorites</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="nav-auth" id="nav-auth">
+                        <a href="login.html">Log In</a>
+                        <a href="signup.html" class="btn" style="padding: 5px 12px; font-size: 0.85rem;">Sign Up</a>
+                    </li>
                 </ul>
-            </section>
-        </div>
-    </main>
+                <div class="header-tools">
+                    <div class="accent-picker">
+                        <button type="button" class="tool-btn" id="accent-toggle" aria-label="Choose Accent Color" aria-expanded="false">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.5-.8 1.5-1.5 0-.9-.6-1.2-.6-2.1 0-.8.7-1.4 1.5-1.4H16a5 5 0 0 0 5-5c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg>
+                        </button>
+                        <div class="accent-panel" id="accent-panel" hidden>
+                            <div class="accent-options" role="group" aria-label="Accent color">
+                                <button type="button" class="accent-swatch" data-accent="sky" aria-label="Sky Accent" aria-pressed="true"></button>
+                                <button type="button" class="accent-swatch" data-accent="crimson" aria-label="Crimson Accent" aria-pressed="false"></button>
+                                <button type="button" class="accent-swatch" data-accent="gold" aria-label="Gold Accent" aria-pressed="false"></button>
+                                <button type="button" class="accent-swatch" data-accent="emerald" aria-label="Emerald Accent" aria-pressed="false"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="tool-btn" id="sound-toggle" aria-label="Toggle Sound Effects" aria-pressed="false">
+                        <svg class="icon-sound-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+                        <svg class="icon-sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="m16 9 6 6"/><path d="m22 9-6 6"/></svg>
+                    </button>
+                    <button type="button" class="theme-toggle" id="change-background" aria-label="Toggle Theme">
+                        Light Theme
+                    </button>
+                </div>
+            </nav>
+        </header>
 
-    <footer>
-        <p>MovieVerse &copy; 2026. Authors: Nurkhat Assan, Daurenbek Anuar.</p>
-    </footer>
-</div>
-    <script src="js/assignment.js"></script>
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <h2>Navigation</h2>
+            <ul>
+                <li><a href="#hero">✨ Overview</a></li>
+                <li><a href="#stats">📊 Community Stats</a></li>
+                <li><a href="#collection">🎬 Curated Collection</a></li>
+                <li><a href="#quote-section">💬 Quote of the Day</a></li>
+                <li><a href="movie.html">🔍 Live OMDb Search</a></li>
+                <li><a href="favorites.html">⭐ Watchlist</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Body -->
+        <main>
+            <div class="container">
+                <!-- Greeting & Hero Banner -->
+                <section class="greeting-box" id="hero">
+                    <span id="time-greeting" class="greeting-text">Welcome to MovieVerse!</span>
+                    <span class="greeting-subtitle">Explore a handpicked universe of legendary masterpieces and search thousands of films worldwide with live API integration.</span>
+                    <div class="button-row">
+                        <a href="movie.html" class="btn">🔍 Search Online Database</a>
+                        <a href="favorites.html" class="btn btn-secondary">⭐ My Favorites</a>
+                        <a href="signup.html" class="btn btn-secondary">Join Community</a>
+                    </div>
+                </section>
+
+                <!-- Animated Community Statistics -->
+                <section class="stats-section" id="stats">
+                    <div class="stat-card">
+                        <div class="counter-value" data-target="1500" data-suffix="+">0</div>
+                        <div class="stat-label">Movies in Database</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="counter-value" data-target="85" data-suffix="K+">0</div>
+                        <div class="stat-label">Active Cinephiles</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="counter-value" data-target="98" data-suffix="%">0</div>
+                        <div class="stat-label">Positive Feedback</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="counter-value" data-target="24" data-suffix="/7">0</div>
+                        <div class="stat-label">Real-Time Sync</div>
+                    </div>
+                </section>
+
+                <!-- Filter Bar -->
+                <section id="collection">
+                    <div class="section-title">
+                        <h2>Curated Movie Collection</h2>
+                        <span style="font-size: 0.95rem; font-weight: normal; color: var(--text-muted);">21 Featured Masterpieces</span>
+                    </div>
+
+                    <div class="filter-bar">
+                        <span>Filter Genre:</span>
+                        <button type="button" class="filter-btn active" data-genre="all">All</button>
+                        <button type="button" class="filter-btn" data-genre="scifi">Sci-Fi</button>
+                        <button type="button" class="filter-btn" data-genre="action">Action</button>
+                        <button type="button" class="filter-btn" data-genre="drama">Drama</button>
+                        <button type="button" class="filter-btn" data-genre="crime">Crime</button>
+                        <button type="button" class="filter-btn" data-genre="animation">Animation</button>
+                    </div>
+
+                    <!-- 21 Curated Movies Grid -->
+                    <div class="movie-grid" id="movie-grid">
+                        <!-- Movie 1: Interstellar -->
+                        <div class="movie-card" data-id="tt0816692" data-genre="scifi drama" data-year="2014">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/interstellar.jpg" alt="Interstellar" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>Interstellar</h3>
+                                    <p>Sci-Fi / Adventure / Drama</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">2014</span>
+                                    <span>★ 8.7</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 2: Inception -->
+                        <div class="movie-card" data-id="tt1375666" data-genre="scifi action" data-year="2010">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/inception.jpg" alt="Inception" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>Inception</h3>
+                                    <p>Sci-Fi / Action / Thriller</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">2010</span>
+                                    <span>★ 8.8</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 3: The Dark Knight -->
+                        <div class="movie-card" data-id="tt0468569" data-genre="action crime drama" data-year="2008">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/dark_knight.jpg" alt="The Dark Knight" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>The Dark Knight</h3>
+                                    <p>Action / Crime / Drama</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">2008</span>
+                                    <span>★ 9.0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 4: Dune: Part Two -->
+                        <div class="movie-card" data-id="tt15239678" data-genre="scifi action" data-year="2024">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/dune2.jpg" alt="Dune: Part Two" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>Dune: Part Two</h3>
+                                    <p>Sci-Fi / Action / Adventure</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">2024</span>
+                                    <span>★ 8.6</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 5: Oppenheimer -->
+                        <div class="movie-card" data-id="tt15398776" data-genre="drama" data-year="2023">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/oppenheimer.jpg" alt="Oppenheimer" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>Oppenheimer</h3>
+                                    <p>Biography / Drama / History</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">2023</span>
+                                    <span>★ 8.9</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 6: Spider-Man: Across the Spider-Verse -->
+                        <div class="movie-card" data-id="tt9362722" data-genre="animation action scifi" data-year="2023">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/spiderman_verse.jpg" alt="Spider-Man: Across the Spider-Verse" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>Spider-Man: Across Spider-Verse</h3>
+                                    <p>Animation / Action / Sci-Fi</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">2023</span>
+                                    <span>★ 8.7</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 7: Gladiator -->
+                        <div class="movie-card" data-id="tt0172495" data-genre="action drama" data-year="2000">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/gladiator.jpg" alt="Gladiator" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>Gladiator</h3>
+                                    <p>Action / Adventure / Drama</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">2000</span>
+                                    <span>★ 8.5</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 8: Pulp Fiction -->
+                        <div class="movie-card" data-id="tt0110912" data-genre="crime drama" data-year="1994">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/pulp_fiction.jpg" alt="Pulp Fiction" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>Pulp Fiction</h3>
+                                    <p>Crime / Drama</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">1994</span>
+                                    <span>★ 8.9</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 9: Fight Club -->
+                        <div class="movie-card" data-id="tt0137523" data-genre="drama" data-year="1999">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/fight_club.jpg" alt="Fight Club" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>Fight Club</h3>
+                                    <p>Drama / Thriller</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">1999</span>
+                                    <span>★ 8.8</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 10: The Matrix -->
+                        <div class="movie-card" data-id="tt0133093" data-genre="scifi action" data-year="1999">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/matrix.jpg" alt="The Matrix" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>The Matrix</h3>
+                                    <p>Action / Sci-Fi</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">1999</span>
+                                    <span>★ 8.7</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 11: Spirited Away -->
+                        <div class="movie-card" data-id="tt0245429" data-genre="animation drama" data-year="2001">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/spirited_away.jpg" alt="Spirited Away" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>Spirited Away</h3>
+                                    <p>Animation / Adventure / Fantasy</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">2001</span>
+                                    <span>★ 8.6</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 12: Parasite -->
+                        <div class="movie-card" data-id="tt6751668" data-genre="drama crime" data-year="2019">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/parasite.jpg" alt="Parasite" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>Parasite</h3>
+                                    <p>Drama / Thriller</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">2019</span>
+                                    <span>★ 8.5</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 13: Avengers: Endgame -->
+                        <div class="movie-card" data-id="tt4154796" data-genre="action scifi" data-year="2019">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/endgame.jpg" alt="Avengers: Endgame" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>Avengers: Endgame</h3>
+                                    <p>Action / Adventure / Sci-Fi</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">2019</span>
+                                    <span>★ 8.4</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 14: Whiplash -->
+                        <div class="movie-card" data-id="tt2582802" data-genre="drama" data-year="2014">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/whiplash.jpg" alt="Whiplash" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>Whiplash</h3>
+                                    <p>Drama / Music</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">2014</span>
+                                    <span>★ 8.5</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 15: Blade Runner 2049 -->
+                        <div class="movie-card" data-id="tt1856101" data-genre="scifi drama" data-year="2017">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/bladerunner2049.jpg" alt="Blade Runner 2049" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>Blade Runner 2049</h3>
+                                    <p>Action / Drama / Sci-Fi</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">2017</span>
+                                    <span>★ 8.0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 16: Avatar: Fire and Ash -->
+                        <div class="movie-card" data-id="avatar_fire_ash" data-genre="scifi action" data-year="2025">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/avatar.jpg" alt="Avatar: Fire and Ash" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>Avatar: Fire and Ash</h3>
+                                    <p>Sci-Fi / Adventure</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">2025</span>
+                                    <span>Upcoming</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 17: Superman -->
+                        <div class="movie-card" data-id="superman_legacy" data-genre="action scifi" data-year="2025">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/superman.jpg" alt="Superman" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>Superman</h3>
+                                    <p>Action / Superhero / Sci-Fi</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">2025</span>
+                                    <span>Upcoming</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 18: Mickey 17 -->
+                        <div class="movie-card" data-id="mickey_17" data-genre="scifi" data-year="2025">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/mickey17.jpg" alt="Mickey 17" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>Mickey 17</h3>
+                                    <p>Sci-Fi / Mystery</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">2025</span>
+                                    <span>Upcoming</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 19: Mission: Impossible -->
+                        <div class="movie-card" data-id="mission_impossible_8" data-genre="action" data-year="2025">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/mission.jpg" alt="Mission: Impossible - The Final Reckoning" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>Mission: Impossible</h3>
+                                    <p>Action / Spy / Thriller</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">2025</span>
+                                    <span>Upcoming</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 20: Thunderbolts* -->
+                        <div class="movie-card" data-id="thunderbolts_marvel" data-genre="action" data-year="2025">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/thunderbolts.jpg" alt="Thunderbolts*" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>Thunderbolts*</h3>
+                                    <p>Action / Superhero</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">2025</span>
+                                    <span>Upcoming</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Movie 21: The Gorge -->
+                        <div class="movie-card" data-id="the_gorge" data-genre="action drama" data-year="2025">
+                            <div class="card-poster-wrap">
+                                <button type="button" class="fav-btn" title="Add to favorites">★</button>
+                                <img src="images/gorge.jpg" alt="The Gorge" loading="lazy">
+                            </div>
+                            <div class="movie-info">
+                                <div>
+                                    <h3>The Gorge</h3>
+                                    <p>Action / Romance / Thriller</p>
+                                </div>
+                                <div class="movie-meta-tags">
+                                    <span class="badge">2025</span>
+                                    <span>Upcoming</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Movie Quote of the Day Section -->
+                <section class="quote-box" id="quote-section">
+                    <h2 class="section-title" style="margin-bottom: 1rem;">💬 Movie Quote of the Day</h2>
+                    <div class="quote-content">
+                        <p id="quote-text">"May the Force be with you." — <strong id="quote-movie" style="color: var(--accent);">Star Wars (1977)</strong></p>
+                    </div>
+                    <div class="button-row">
+                        <button type="button" id="new-quote-btn" class="btn">Get New Quote</button>
+                        <button type="button" class="copy-btn" data-copy-target="#quote-text" title="Copy quote to clipboard">📋 Copy Quote</button>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>MovieVerse &copy; 2026. Authors: <strong>Nurkhat Assan</strong>, <strong>Daurenbek Anuar</strong>. Group: <strong>SE-2514</strong>.</p>
+            <p style="margin-top: 6px; font-size: 0.8rem; color: var(--text-muted);">Built with semantic HTML5, CSS Grid & Flexbox, vanilla JavaScript, and OMDb API.</p>
+        </footer>
+    </div>
 </body>
 </html>

@@ -1,266 +1,156 @@
-
-<!-- Created by Daurenbek Anuar -->
 <!DOCTYPE html>
+<!-- MovieVerse - Search & Live OMDb API Integration
+     Authors: Nurkhat Assan, Daurenbek Anuar
+     Group: SE-2514
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MovieVerse - Search &amp; Movie</title>
+    <meta name="description" content="Search movies, series, and cinema worldwide using the live OMDb API. View detailed cast, plot synopses, and IMDb ratings.">
+    <title>MovieVerse — Search</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- Assignment 6: jQuery CDN & Script -->
-    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery-4.0.0.min.js"><\/script>')</script>
-    <script src="js/script.js"></script>
+    <script>
+        try {
+            if (localStorage.getItem("movieverse-theme") === "light") {
+                document.documentElement.classList.add("light-theme");
+            }
+            var savedAccent = localStorage.getItem("movieverse-accent");
+            if (savedAccent) {
+                document.documentElement.setAttribute("data-accent", savedAccent);
+            }
+        } catch (e) {}
+    </script>
+    <script src="js/jquery-4.0.0.min.js" defer></script>
+    <script src="js/script.js" defer></script>
+    <script src="js/favorites.js" defer></script>
+    <script src="js/api.js" defer></script>
 </head>
 <body>
-    <!-- Task 4: Scroll Progress Bar -->
     <div id="scroll-progress-bar"></div>
-    <!-- Task 7: Toast Notifications Container -->
-    <div id="toast-container"></div>
-<div class="page-layout">
-    <header id="main-header">
-        <nav class="nav-menu">
-            <div class="logo">MovieVerse</div>
-            <ul class="nav-links">
-                <li><a href="index.html">Main Menu</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="movie.html">Search / Movie</a></li>
-                <li><a href="favorites.html">Favorites</a></li>
-            </ul>
-            <button
-                type="button"
-                class="theme-toggle"
-                id="change-background"
-                aria-label="Toggle theme">
-                Light Theme
-            </button>
-        </nav>
-    </header>
+    <div id="toast-container" aria-live="polite"></div>
 
-    <aside class="sidebar">
-        <h2>Search</h2>
-        <ul>
-            <li><a href="movie.html">Movie Search</a></li>
-            <li><a href="index.html#gallery">Movie Gallery</a></li>
-            <li><a href="favorites.html">Favorites</a></li>
-        </ul>
-    </aside>
-
-    <main>
-        <div class="container">
-            <h1 class="section-title">Search Movies</h1>
-
-            <!-- Tasks 1, 2, 3: jQuery Real-Time Search, Autocomplete & Highlighting -->
-            <form action="movie.html" method="GET" class="search-box" onsubmit="event.preventDefault();">
-                <div class="search-wrapper">
-                    <input type="text" id="movie-search-input" name="query" value=""
-                           placeholder="Type to search movies, genres, or FAQ topics..." autocomplete="off">
-                    <ul id="search-suggestions" class="autocomplete-dropdown"></ul>
-                </div>
-                <button type="submit" class="btn">Search</button>
-            </form>
-
-            <p style="margin-bottom: 20px; color: #94a3b8;">
-                Results for:
-                <strong style="color: #f8fafc;" id="search-query-display">
-                    "All Movies"
-                </strong>
-                <span id="search-count-display">(Found 4 matches)</span>
-            </p>
-
-            <div class="search-results-list" style="display: flex; flex-direction: column; gap: 20px;">
-                <!-- Movie 1 -->
-                <div class="search-movie-item movie-result-card">
-                    <img src="images/mickey17.jpg" alt="Mickey 17"
-                         class="movie-result-poster">
-
-                    <div class="movie-result-details">
-                        <div>
-                            <h2 class="movie-title searchable-text mickey">Mickey 17 (2025)</h2>
-                            <span class="movie-badge">Sci-Fi / Adventure</span>
-                            <p class="movie-desc searchable-text">
-                                Mickey 17 is an employee sent to colonize a
-                                freezing world. Whenever he dies, a new clone
-                                is created with his memories.
-                                <span id="more-text" style="display: none;">
-                                    In this sci-fi thriller directed by Bong Joon-ho, Mickey Barnes faces impossible odds on an ice world, until he accidentally meets another clone of himself who is determined to survive.
-                                </span>
-                            </p>
-                            <!-- Read More toggle button -->
-                            <button type="button" id="read-more-btn" class="read-more-btn">Read More</button>
-                        </div>
-
-                        <!-- Interactive star rating widget -->
-                        <div class="rating-widget" id="movie-rating-widget">
-                            <span class="rating-title">Your Rating:</span>
-                            <div class="stars-row" id="movie-stars">
-                                <span class="star-rating-item" data-rating="1" title="1 star">★</span>
-                                <span class="star-rating-item" data-rating="2" title="2 stars">★</span>
-                                <span class="star-rating-item" data-rating="3" title="3 stars">★</span>
-                                <span class="star-rating-item" data-rating="4" title="4 stars">★</span>
-                                <span class="star-rating-item" data-rating="5" title="5 stars">★</span>
-                                <span id="rating-score-text" class="rating-score">Click a star to rate</span>
+    <div class="page-layout">
+        <!-- Main Navigation Header -->
+        <header id="main-header">
+            <nav class="nav-menu" aria-label="Main Navigation">
+                <a href="index.html" class="logo">
+                    🎬 Movie<span>Verse</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movie.html" class="active">Search</a></li>
+                    <li><a href="favorites.html">Favorites</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="nav-auth" id="nav-auth">
+                        <a href="login.html">Log In</a>
+                        <a href="signup.html" class="btn" style="padding: 5px 12px; font-size: 0.85rem;">Sign Up</a>
+                    </li>
+                </ul>
+                <div class="header-tools">
+                    <div class="accent-picker">
+                        <button type="button" class="tool-btn" id="accent-toggle" aria-label="Choose Accent Color" aria-expanded="false">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.5-.8 1.5-1.5 0-.9-.6-1.2-.6-2.1 0-.8.7-1.4 1.5-1.4H16a5 5 0 0 0 5-5c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg>
+                        </button>
+                        <div class="accent-panel" id="accent-panel" hidden>
+                            <div class="accent-options" role="group" aria-label="Accent color">
+                                <button type="button" class="accent-swatch" data-accent="sky" aria-label="Sky Accent" aria-pressed="true"></button>
+                                <button type="button" class="accent-swatch" data-accent="crimson" aria-label="Crimson Accent" aria-pressed="false"></button>
+                                <button type="button" class="accent-swatch" data-accent="gold" aria-label="Gold Accent" aria-pressed="false"></button>
+                                <button type="button" class="accent-swatch" data-accent="emerald" aria-label="Emerald Accent" aria-pressed="false"></button>
                             </div>
                         </div>
-
-                        <div class="actions-row">
-                            <button class="btn" type="button" id="watch-now-btn">Watch Now</button>
-                            <span id="watch-feedback" style="display: none; color: #38bdf8; align-self: center; font-size: 0.9rem;">Starting movie player...</span>
-                        </div>
                     </div>
+                    <button type="button" class="tool-btn" id="sound-toggle" aria-label="Toggle Sound Effects" aria-pressed="false">
+                        <svg class="icon-sound-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+                        <svg class="icon-sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="m16 9 6 6"/><path d="m22 9-6 6"/></svg>
+                    </button>
+                    <button type="button" class="theme-toggle" id="change-background" aria-label="Toggle Theme">
+                        Light Theme
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <h2>Search Engine</h2>
+            <ul>
+                <li><a href="movie.html">🔍 Live Search</a></li>
+                <li><a href="favorites.html">⭐ Saved Watchlist</a></li>
+                <li><a href="index.html#collection">🎬 Featured Movies</a></li>
+                <li><a href="profile.html">👤 Personal Ratings</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Search Content -->
+        <main>
+            <div class="container">
+                <div class="section-title">
+                    <h2>Live Movie Database Search</h2>
+                    <span class="badge" style="font-size: 0.85rem;">Powered by OMDb Public API</span>
                 </div>
 
-                <!-- Movie 2 -->
-                <div class="search-movie-item movie-result-card">
-                    <img src="images/avatar.jpg" alt="Avatar: Fire and Ash"
-                         class="movie-result-poster">
-
-                    <div class="movie-result-details">
-                        <div>
-                            <h2 class="movie-title searchable-text">Avatar: Fire and Ash (2026)</h2>
-                            <span class="movie-badge">Sci-Fi / Adventure</span>
-                            <p class="movie-desc searchable-text">
-                                Jake Sully and Neytiri encounter an aggressive new Na'vi volcanic tribe known as the Ash People on Pandora.
-                            </p>
-                        </div>
-                        <div class="actions-row">
-                            <button class="btn" type="button">Watch Now</button>
-                        </div>
+                <!-- Search Form (novalidate per requirements) -->
+                <form id="movie-search-form" class="search-box" novalidate>
+                    <div class="search-wrapper">
+                        <input type="text" id="movie-search-input" name="query"
+                               placeholder="Type any movie or series title (e.g. Batman, Avatar, Inception)..."
+                               autocomplete="off" role="combobox" aria-autocomplete="list" aria-expanded="false">
+                        <button type="submit" class="btn" style="min-width: 120px;">Search</button>
+                        <ul id="search-suggestions" class="autocomplete-dropdown" style="display: none;"></ul>
                     </div>
+                </form>
+
+                <!-- Search History Chips -->
+                <div class="search-chips-wrapper">
+                    <span>Recent Searches:</span>
+                    <div id="search-history-chips" style="display: flex; gap: 8px; flex-wrap: wrap;"></div>
                 </div>
 
-                <!-- Movie 3 -->
-                <div class="search-movie-item movie-result-card">
-                    <img src="images/superman.jpg" alt="Superman"
-                         class="movie-result-poster">
-
-                    <div class="movie-result-details">
-                        <div>
-                            <h2 class="movie-title searchable-text">Superman (2025)</h2>
-                            <span class="movie-badge">Action / Superhero</span>
-                            <p class="movie-desc searchable-text">
-                                Clark Kent reconciles his heritage with his human upbringing, embodying truth and justice in a world that views kindness as old-fashioned.
-                            </p>
-                        </div>
-                        <div class="actions-row">
-                            <button class="btn" type="button">Watch Now</button>
-                        </div>
-                    </div>
+                <!-- Filters & Search Controls -->
+                <div class="filter-bar" style="margin-top: 1rem;">
+                    <span>Media Type:</span>
+                    <button type="button" class="filter-btn active" data-search-type="">All</button>
+                    <button type="button" class="filter-btn" data-search-type="movie">Movies</button>
+                    <button type="button" class="filter-btn" data-search-type="series">Series</button>
                 </div>
 
-                <!-- Movie 4 -->
-                <div class="search-movie-item movie-result-card">
-                    <img src="images/mission.jpg" alt="Mission: Impossible"
-                         class="movie-result-poster">
+                <!-- Summary Status Line -->
+                <p style="margin-bottom: 24px; color: var(--text-muted); font-size: 1rem;">
+                    Results for: <strong style="color: var(--text-primary);" id="search-query-display">"..."</strong>
+                    <span id="search-count-display">(Searching...)</span>
+                </p>
 
-                    <div class="movie-result-details">
-                        <div>
-                            <h2 class="movie-title searchable-text">Mission: Impossible - The Final Reckoning</h2>
-                            <span class="movie-badge">Action / Spy Thriller</span>
-                            <p class="movie-desc searchable-text">
-                                Ethan Hunt and the IMF team confront an all-powerful artificial intelligence known as the Entity in their ultimate global mission.
-                            </p>
-                        </div>
-                        <div class="actions-row">
-                            <button class="btn" type="button">Watch Now</button>
-                        </div>
-                    </div>
+                <!-- Status / Error / Loading Container -->
+                <div id="search-status" style="display: none;"></div>
+
+                <!-- Search Results Grid -->
+                <div class="movie-grid" id="search-results-list"></div>
+
+                <!-- Pagination / Load More Button -->
+                <div style="text-align: center; margin-top: 2rem; margin-bottom: 3rem;">
+                    <button type="button" id="load-more-btn" class="btn btn-secondary" style="display: none; padding: 12px 30px;">
+                        Load More Movies
+                    </button>
                 </div>
             </div>
+        </main>
 
-            <!-- TASK 2: FAQ Accordion -->
+        <!-- Footer -->
+        <footer>
+            <p>MovieVerse &copy; 2026. Authors: <strong>Nurkhat Assan</strong>, <strong>Daurenbek Anuar</strong>. Group: <strong>SE-2514</strong>.</p>
+        </footer>
+    </div>
 
-            <section id="movie-faq" style="margin-top: 35px;">
-                <h2 class="section-title">Frequently Asked Questions</h2>
-
-
-                
-
-                <div class="faq-item"
-                     style="margin-bottom: 12px; border-radius: 8px;
-                     overflow: hidden; background: #161f30;">
-                    <button type="button" class="faq-question searchable-text"
-                            aria-expanded="false"
-                            style="width: 100%; padding: 15px;
-                            display: flex; justify-content: space-between;
-                            gap: 12px; border: 0; cursor: pointer;
-                            text-align: left; font: inherit;
-                            background: #161f30; color: inherit;">
-                        What is MovieVerse?
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer" aria-hidden="true"
-                         style="max-height: 0; overflow: hidden;
-                         padding: 0 15px; opacity: 0;
-                         transition: max-height 0.35s ease,
-                         padding 0.35s ease, opacity 0.35s ease;">
-                        <p class="searchable-text">
-                            MovieVerse is a website where users can explore
-                            movies, discover popular titles, and find
-                            information about films.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="faq-item"
-                     style="margin-bottom: 12px; border-radius: 8px;
-                     overflow: hidden; background: #161f30;">
-                    <button type="button" class="faq-question searchable-text"
-                            aria-expanded="false"
-                            style="width: 100%; padding: 15px;
-                            display: flex; justify-content: space-between;
-                            gap: 12px; border: 0; cursor: pointer;
-                            text-align: left; font: inherit;
-                            background: #161f30; color: inherit;">
-                        What is Mickey 17 about?
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer" aria-hidden="true"
-                         style="max-height: 0; overflow: hidden;
-                         padding: 0 15px; opacity: 0;
-                         transition: max-height 0.35s ease,
-                         padding 0.35s ease, opacity 0.35s ease;">
-                        <p class="searchable-text">
-                            Mickey 17 follows an expendable worker on a
-                            dangerous mission to colonize a frozen planet.
-                            When he dies, another version of him is created.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="faq-item"
-                     style="margin-bottom: 12px; border-radius: 8px;
-                     overflow: hidden; background: #161f30;">
-                    <button type="button" class="faq-question searchable-text"
-                            aria-expanded="false"
-                            style="width: 100%; padding: 15px;
-                            display: flex; justify-content: space-between;
-                            gap: 12px; border: 0; cursor: pointer;
-                            text-align: left; font: inherit;
-                            background: #161f30; color: inherit;">
-                        Which genres can I explore?
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer" aria-hidden="true"
-                         style="max-height: 0; overflow: hidden;
-                         padding: 0 15px; opacity: 0;
-                         transition: max-height 0.35s ease,
-                         padding 0.35s ease, opacity 0.35s ease;">
-                        <p class="searchable-text">
-                            MovieVerse includes movie categories such as
-                            science fiction, adventure, action, thriller,
-                            and drama.
-                        </p>
-                    </div>
-                </div>
-            </section>
+    <!-- Movie Details Modal Dialog -->
+    <div class="modal-overlay" id="movie-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-content">
+            <button type="button" class="modal-close" id="modal-close-btn" aria-label="Close dialog">&times;</button>
+            <div id="modal-details-content"></div>
         </div>
-    </main>
-
-    <footer>
-        <p>MovieVerse &copy; 2026. Authors: Nurkhat Assan, Daurenbek Anuar.</p>
-    </footer>
-</div>
-    <script src="js/assignment.js"></script>
+    </div>
 </body>
 </html>

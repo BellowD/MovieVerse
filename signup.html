@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<!-- MovieVerse - Sign Up (Registration Simulation)
+     Authors: Nurkhat Assan, Daurenbek Anuar
+     Group: SE-2514
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create a free MovieVerse account to build personal watchlists and submit movie reviews.">
+    <title>MovieVerse — Sign Up</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        try {
+            if (localStorage.getItem("movieverse-theme") === "light") {
+                document.documentElement.classList.add("light-theme");
+            }
+            var savedAccent = localStorage.getItem("movieverse-accent");
+            if (savedAccent) {
+                document.documentElement.setAttribute("data-accent", savedAccent);
+            }
+            if (localStorage.getItem("movieverse_session")) {
+                window.location.replace("profile.html");
+            }
+        } catch (e) {}
+    </script>
+    <script src="js/jquery-4.0.0.min.js" defer></script>
+    <script src="js/script.js" defer></script>
+    <script src="js/validation.js" defer></script>
+    <script src="js/favorites.js" defer></script>
+    <script src="js/auth.js" defer></script>
+</head>
+<body>
+    <div id="scroll-progress-bar"></div>
+    <div id="toast-container" aria-live="polite"></div>
+
+    <div class="page-layout">
+        <!-- Header -->
+        <header id="main-header">
+            <nav class="nav-menu" aria-label="Main Navigation">
+                <a href="index.html" class="logo">
+                    🎬 Movie<span>Verse</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movie.html">Search</a></li>
+                    <li><a href="favorites.html">Favorites</a></li>
+                    <li><a href="profile.html">Profile</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="nav-auth" id="nav-auth">
+                        <a href="login.html">Log In</a>
+                        <a href="signup.html" class="btn active" style="padding: 5px 12px; font-size: 0.85rem;">Sign Up</a>
+                    </li>
+                </ul>
+                <div class="header-tools">
+                    <button type="button" class="theme-toggle" id="change-background" aria-label="Toggle Theme">
+                        Light Theme
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Authentication</h2>
+            <ul>
+                <li><a href="signup.html" style="color: var(--accent);">✨ Create Account</a></li>
+                <li><a href="login.html">🔑 Sign In</a></li>
+                <li><a href="about.html">ℹ️ About MovieVerse</a></li>
+                <li><a href="contact.html">📬 Help & Support</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            <div class="container">
+                <!-- Registration Form (novalidate as required) -->
+                <form id="signup-form" class="form-card" novalidate>
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <h1 style="font-size: 2rem; color: var(--text-primary); margin-bottom: 0.5rem;">Join MovieVerse</h1>
+                        <p style="color: var(--text-muted); font-size: 0.95rem;">Create your personal cinephile profile in seconds</p>
+                    </div>
+
+                    <div id="signup-status" class="form-status"></div>
+
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input type="text" id="signup-name" name="name" autocomplete="name" placeholder="Nurkhat Assan">
+                        <p class="field-hint">At least 2 characters, letters only.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input type="text" id="signup-email" name="email" inputmode="email" autocomplete="email" placeholder="name@example.com">
+                        <p class="field-hint">Used for sign in and account recovery.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-phone">Mobile Phone</label>
+                        <input type="tel" id="signup-phone" name="phone" autocomplete="tel" placeholder="+7 701 234 56 78">
+                        <p class="field-hint">Kazakhstan pattern: +7 7XX XXX XX XX or 8 7XX XXX XX XX</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <input type="password" id="signup-password" name="password" autocomplete="new-password" placeholder="Create strong password">
+                        <p class="field-hint">Min 8 characters, with uppercase, lowercase, number, and special symbol.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-confirm">Confirm Password</label>
+                        <input type="password" id="signup-confirm" name="confirm" autocomplete="new-password" placeholder="Repeat your password">
+                    </div>
+
+                    <div style="margin-top: 2rem;">
+                        <button type="submit" class="btn" style="width: 100%; padding: 12px; font-size: 1rem;">Create Account</button>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 1.5rem; color: var(--text-muted); font-size: 0.9rem;">
+                        Already registered? <a href="login.html" style="color: var(--accent); font-weight: 600;">Sign in here</a>
+                    </div>
+                </form>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>MovieVerse &copy; 2026. Authors: <strong>Nurkhat Assan</strong>, <strong>Daurenbek Anuar</strong>. Group: <strong>SE-2514</strong>.</p>
+        </footer>
+    </div>
+</body>
+</html>

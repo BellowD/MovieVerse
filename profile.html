@@ -1,220 +1,221 @@
-
-<!-- Created by Nurkhat Assan -->
 <!DOCTYPE html>
+<!-- MovieVerse - User Profile & Account Settings
+     Authors: Nurkhat Assan, Daurenbek Anuar
+     Group: SE-2514
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MovieVerse - Profile</title>
+    <meta name="description" content="View your personal MovieVerse profile, rated movies history, personal statistics, and manage account preferences.">
+    <title>MovieVerse — Profile</title>
     <link rel="stylesheet" href="css/style.css">
-    <!-- Assignment 6: jQuery CDN & Script -->
-    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/jquery-4.0.0.min.js"><\/script>')</script>
-    <script src="js/script.js"></script>
+    <script>
+        try {
+            if (localStorage.getItem("movieverse-theme") === "light") {
+                document.documentElement.classList.add("light-theme");
+            }
+            var savedAccent = localStorage.getItem("movieverse-accent");
+            if (savedAccent) {
+                document.documentElement.setAttribute("data-accent", savedAccent);
+            }
+            // Quick check: if no session, redirect immediately to login
+            if (!localStorage.getItem("movieverse_session")) {
+                window.location.replace("login.html");
+            }
+        } catch (e) {}
+    </script>
+    <script src="js/jquery-4.0.0.min.js" defer></script>
+    <script src="js/script.js" defer></script>
+    <script src="js/validation.js" defer></script>
+    <script src="js/favorites.js" defer></script>
+    <script src="js/auth.js" defer></script>
 </head>
 <body>
-    <!-- Task 4: Scroll Progress Bar -->
     <div id="scroll-progress-bar"></div>
-    <!-- Task 7: Toast Notifications Container -->
-    <div id="toast-container"></div>
-<div class="page-layout">
-    <header id="main-header">
-        <nav class="nav-menu">
-            <div class="logo">MovieVerse</div>
-            <ul class="nav-links">
-                <li><a href="index.html">Main Menu</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="movie.html">Search / Movie</a></li>
-                <li><a href="favorites.html">Favorites</a></li>
-            </ul>
-            <button
-                type="button"
-                class="theme-toggle"
-                id="change-background"
-                aria-label="Toggle theme">
-                Light Theme
-            </button>
-        </nav>
-    </header>
+    <div id="toast-container" aria-live="polite"></div>
 
-    <aside class="sidebar">
-        <h2>Profile</h2>
-        <ul>
-            <li><a href="profile.html">My Profile</a></li>
-            <li><a href="#ratings">Ratings</a></li>
-            <li><a href="#settings">Settings</a></li>
-            <li><a href="#subscription-feature">Subscription</a></li>
-        </ul>
-    </aside>
-
-    <main>
-        <div class="container">
-            <section class="profile-header">
-                <img src="images/profile.jpg" alt="Profile Picture"
-                     class="profile-img">
-                <div class="profile-info">
-                    <h1>Kairat_Nurtas</h1>
-                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-                        <p class="email" id="profile-email-text" style="margin-bottom: 0;">kairat67@gmail.com</p>
-                        <!-- Task 8: Copy to Clipboard Button -->
-                        <button type="button" class="copy-btn" data-copy-target="#profile-email-text" title="Copy email address">Copy Email</button>
-                    </div>
-                </div>
-            </section>
-
-            <hr class="divider">
-
-            <section id="ratings">
-                <h2 class="section-title">Recently Rated Movies</h2>
-                <div class="table-wrapper">
-                    <table class="ratings-table">
-                        <thead>
-                            <tr>
-                                <th>Movie Title</th>
-                                <th>Genre</th>
-                                <th>Date Rated</th>
-                                <th>User Rating</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Avatar: Fire and Ash</td>
-                                <td>Sci-Fi / Adventure</td>
-                                <td>2026-09-12</td>
-                                <td>★ 9.5 / 10</td>
-                            </tr>
-                            <tr>
-                                <td>Mickey 17</td>
-                                <td>Sci-Fi / Mystery</td>
-                                <td>2026-09-10</td>
-                                <td>★ 8.8 / 10</td>
-                            </tr>
-                            <tr>
-                                <td>Mission: Impossible - The Final Reckoning</td>
-                                <td>Action / Spy</td>
-                                <td>2026-09-05</td>
-                                <td>★ 9.0 / 10</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
-
-            <section id="settings">
-                <h2 class="section-title">Profile Settings</h2>
-                <form id="contact-form" class="form-card">
-                    <div class="form-group">
-                        <label for="username">Display Username:</label>
-                        <input type="text" id="username" name="username"
-                               value="Kairat_Nurtas">
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email Address:</label>
-                        <input type="email" id="email" name="email"
-                               value="kairat67@gmail.com" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="fav-genre">Favorite Genre:</label>
-                        <select id="fav-genre" name="fav-genre">
-                            <option value="action">Action</option>
-                            <option value="scifi">Sci-Fi</option>
-                            <option value="drama">Drama</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="bio">Bio / Status:</label>
-                        <textarea id="bio" name="bio" rows="3">Cinema enthusiast and student at AITU.</textarea>
-                    </div>
-
-                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-                        <button type="submit" class="btn">Update Profile</button>
-                        <button type="button" id="reset-profile-btn" class="btn btn-secondary">Reset Fields</button>
-                    </div>
-                    <p id="profile-status" style="margin-top: 14px; font-weight: 500; min-height: 20px;"></p>
-                </form>
-            </section>
-
-            <!-- TASK 3: Popup Subscription -->
-            <section id="subscription-feature" style="margin-top: 35px;">
-                <h2 class="section-title">MovieVerse Subscription</h2>
-                <p>Join MovieVerse by completing the subscription form.</p>
-
-                <button type="button" class="btn" id="open-subscription">
-                    Subscribe Now
-                </button>
-            </section>
-
-            <!-- TASK 1: Form Validation -->
-            <div id="subscription-popup" aria-hidden="true"
-                 style="display: none; position: fixed; inset: 0;
-                 z-index: 1000; background: rgba(0,0,0,0.8);
-                 justify-content: center; align-items: center;
-                 padding: 15px; overflow-y: auto;">
-
-                <div role="dialog" aria-modal="true"
-                     aria-labelledby="subscription-title"
-                     style="position: relative; width: 100%;
-                     max-width: 430px; max-height: 90vh;
-                     overflow-y: auto; padding: 25px;
-                     border-radius: 12px; background: #161f30;
-                     color: #f8fafc;">
-
-                    <button type="button" id="close-subscription"
-                            aria-label="Close popup"
-                            style="position: absolute; top: 8px; right: 12px;
-                            border: 0; background: transparent;
-                            color: inherit; font-size: 28px;
-                            cursor: pointer;">
-                        &times;
-                    </button>
-
-                    <h2 id="subscription-title">Join MovieVerse</h2>
-                    <p>Enter your details below.</p>
-
-                    <form id="subscription-form" novalidate>
-                        <div class="form-group">
-                            <label for="subscription-email">Email Address:</label>
-                            <input type="email" id="subscription-email"
-                                   name="subscription-email"
-                                   placeholder="name@example.com"
-                                   autocomplete="email" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="subscription-password">Password:</label>
-                            <input type="password" id="subscription-password"
-                                   name="subscription-password"
-                                   placeholder="At least 8 characters"
-                                   autocomplete="new-password" required>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="confirm-password">Confirm Password:</label>
-                            <input type="password" id="confirm-password"
-                                   name="confirm-password"
-                                   placeholder="Repeat your password"
-                                   autocomplete="new-password" required>
-                        </div>
-
-                        <p id="form-message" role="status"
-                           aria-live="polite"></p>
-
-                        <button type="submit" class="btn">
-                            Validate and Subscribe
+    <div class="page-layout">
+        <!-- Header -->
+        <header id="main-header">
+            <nav class="nav-menu" aria-label="Main Navigation">
+                <a href="index.html" class="logo">
+                    🎬 Movie<span>Verse</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="movie.html">Search</a></li>
+                    <li><a href="favorites.html">Favorites</a></li>
+                    <li><a href="profile.html" class="active">Profile</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li class="nav-auth" id="nav-auth">
+                        <a href="login.html">Log In</a>
+                        <a href="signup.html" class="btn" style="padding: 5px 12px; font-size: 0.85rem;">Sign Up</a>
+                    </li>
+                </ul>
+                <div class="header-tools">
+                    <div class="accent-picker">
+                        <button type="button" class="tool-btn" id="accent-toggle" aria-label="Choose Accent Color" aria-expanded="false">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a9 9 0 1 0 0 18c1.1 0 1.5-.8 1.5-1.5 0-.9-.6-1.2-.6-2.1 0-.8.7-1.4 1.5-1.4H16a5 5 0 0 0 5-5c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></svg>
                         </button>
-                    </form>
+                        <div class="accent-panel" id="accent-panel" hidden>
+                            <div class="accent-options" role="group" aria-label="Accent color">
+                                <button type="button" class="accent-swatch" data-accent="sky" aria-label="Sky Accent" aria-pressed="true"></button>
+                                <button type="button" class="accent-swatch" data-accent="crimson" aria-label="Crimson Accent" aria-pressed="false"></button>
+                                <button type="button" class="accent-swatch" data-accent="gold" aria-label="Gold Accent" aria-pressed="false"></button>
+                                <button type="button" class="accent-swatch" data-accent="emerald" aria-label="Emerald Accent" aria-pressed="false"></button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="tool-btn" id="sound-toggle" aria-label="Toggle Sound Effects" aria-pressed="false">
+                        <svg class="icon-sound-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18.5 5.5a9 9 0 0 1 0 13"/></svg>
+                        <svg class="icon-sound-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="m16 9 6 6"/><path d="m22 9-6 6"/></svg>
+                    </button>
+                    <button type="button" class="theme-toggle" id="change-background" aria-label="Toggle Theme">
+                        Light Theme
+                    </button>
                 </div>
-            </div>
-        </div>
-    </main>
+            </nav>
+        </header>
 
-    <footer>
-        <p>MovieVerse &copy; 2026. Authors: Nurkhat Assan, Daurenbek Anuar.</p>
-    </footer>
-</div>
-    <script src="js/assignment.js"></script>
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>User Account</h2>
+            <ul>
+                <li><a href="#overview">👤 Profile Card</a></li>
+                <li><a href="#ratings-section">⭐ My Movie Ratings</a></li>
+                <li><a href="#settings-section">⚙️ Profile Settings</a></li>
+                <li><a href="favorites.html">🍿 My Watchlist</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main>
+            <div class="container" id="profile-container">
+                <!-- Profile Header Card -->
+                <section class="greeting-box" id="overview" style="margin-bottom: 2rem;">
+                    <div style="display: flex; gap: 24px; align-items: center; flex-wrap: wrap;">
+                        <img src="images/profile.jpg" alt="Profile Picture" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid var(--accent); box-shadow: var(--shadow-md);">
+                        <div style="flex-grow: 1;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                                <h1 id="profile-name-display" style="font-size: 2rem; color: var(--text-primary); margin-bottom: 4px;">User Profile</h1>
+                                <button type="button" class="btn btn-secondary btn-danger" id="profile-logout-btn">Log Out</button>
+                            </div>
+                            <p style="color: var(--accent); font-weight: 600; margin-bottom: 4px;" id="profile-email-display">user@example.com</p>
+                            <div style="display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.9rem; color: var(--text-muted); margin-top: 8px;">
+                                <span>📞 <strong id="profile-phone-display">+7 701 000 00 00</strong></span>
+                                <span>🎭 Favorite Genre: <strong id="profile-genre-display">Sci-Fi</strong></span>
+                                <span>📅 Member Since: <strong id="profile-joined-display">—</strong></span>
+                            </div>
+                            <p id="profile-bio-display" style="margin-top: 12px; font-size: 0.95rem; color: var(--text-secondary); line-height: 1.5; font-style: italic; background: rgba(0,0,0,0.15); padding: 8px 14px; border-radius: var(--radius-sm);"></p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Activity Statistics -->
+                <section class="stats-section">
+                    <div class="stat-card">
+                        <div class="counter-value" id="profile-fav-count" style="font-size: 2rem;">0</div>
+                        <div class="stat-label">Saved in Watchlist</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="counter-value" id="profile-rating-count" style="font-size: 2rem;">0</div>
+                        <div class="stat-label">Rated Movies</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="counter-value" style="font-size: 2rem; color: var(--success);">Active</div>
+                        <div class="stat-label">Membership Status</div>
+                    </div>
+                </section>
+
+                <!-- Personal Movie Ratings Table -->
+                <section id="ratings-section" style="margin-bottom: 3.5rem;">
+                    <div class="section-title">
+                        <h2>Personal Movie Ratings</h2>
+                        <a href="movie.html" class="btn btn-secondary" style="font-size: 0.85rem; padding: 6px 14px;">+ Rate More Movies</a>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table class="ratings-table">
+                            <thead>
+                                <tr>
+                                    <th>Movie Title & Year</th>
+                                    <th>Genre</th>
+                                    <th>Date Rated</th>
+                                    <th>Your Rating</th>
+                                </tr>
+                            </thead>
+                            <tbody id="profile-ratings-table-body">
+                                <tr>
+                                    <td colspan="4" style="text-align: center; color: var(--text-muted); padding: 2rem;">Loading ratings...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Profile Edit Form (novalidate per requirements) -->
+                <section id="settings-section">
+                    <div class="section-title">
+                        <h2>Account Preferences & Settings</h2>
+                    </div>
+
+                    <form id="profile-form" class="form-card" style="max-width: 100%; margin: 0;" novalidate>
+                        <div id="profile-status" class="form-status"></div>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                            <div class="form-group">
+                                <label for="profile-name-input">Full Name</label>
+                                <input type="text" id="profile-name-input" name="name" autocomplete="name" placeholder="Your full name">
+                                <p class="field-hint">At least 2 characters, letters, spaces and hyphens only.</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profile-email-input">Email Address</label>
+                                <input type="text" id="profile-email-input" name="email" inputmode="email" autocomplete="email" placeholder="name@example.com">
+                                <p class="field-hint">Must be a valid email format.</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profile-phone-input">Mobile Phone</label>
+                                <input type="tel" id="profile-phone-input" name="phone" autocomplete="tel" placeholder="+7 701 234 56 78">
+                                <p class="field-hint">Kazakhstan format: +7 7XX XXX XX XX or 8 7XX XXX XX XX</p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="profile-genre-input">Preferred Genre</label>
+                                <select id="profile-genre-input" name="genre">
+                                    <option value="Sci-Fi">Sci-Fi</option>
+                                    <option value="Action">Action</option>
+                                    <option value="Drama">Drama</option>
+                                    <option value="Crime">Crime</option>
+                                    <option value="Animation">Animation</option>
+                                    <option value="Comedy">Comedy</option>
+                                    <option value="Thriller">Thriller</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="margin-top: 10px;">
+                            <label for="profile-bio-input">About Yourself / Bio</label>
+                            <textarea id="profile-bio-input" name="bio" rows="3" placeholder="Tell fellow movie lovers about your favorite cinema genres and directors..."></textarea>
+                            <span id="profile-bio-counter" class="char-counter">0 / 200</span>
+                        </div>
+
+                        <div class="button-row" style="margin-top: 1.5rem;">
+                            <button type="submit" class="btn">💾 Save Changes</button>
+                            <button type="button" id="profile-reset-btn" class="btn btn-secondary">Reset to Saved</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer>
+            <p>MovieVerse &copy; 2026. Authors: <strong>Nurkhat Assan</strong>, <strong>Daurenbek Anuar</strong>. Group: <strong>SE-2514</strong>.</p>
+        </footer>
+    </div>
 </body>
 </html>
