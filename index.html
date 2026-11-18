@@ -72,16 +72,18 @@
             </nav>
         </header>
 
-        <!-- Sidebar Navigation -->
+        <!-- Sidebar Navigation with Genre Filters -->
         <aside class="sidebar">
             <div class="sidebar-nav-group">
-                <h2>Navigation</h2>
-                <ul>
-                    <li><a href="#collection">Curated Collection</a></li>
-                    <li><a href="#quote-section">Quote of the Day</a></li>
-                    <li><a href="movie.html">Live Search</a></li>
-                    <li><a href="favorites.html">Watchlist</a></li>
-                </ul>
+                <h2>Filter by Genre</h2>
+                <div class="sidebar-genre-filters" role="group" aria-label="Genre Filter">
+                    <button type="button" class="filter-btn active" data-genre="all">All Genres</button>
+                    <button type="button" class="filter-btn" data-genre="scifi">Sci-Fi</button>
+                    <button type="button" class="filter-btn" data-genre="action">Action</button>
+                    <button type="button" class="filter-btn" data-genre="drama">Drama</button>
+                    <button type="button" class="filter-btn" data-genre="crime">Crime</button>
+                    <button type="button" class="filter-btn" data-genre="animation">Animation</button>
+                </div>
             </div>
             <div class="sidebar-bottom">
                 <h3>Information</h3>
@@ -95,21 +97,22 @@
         <!-- Main Content Body -->
         <main>
             <div class="container">
-                <!-- Filter Bar -->
+                <!-- Compact Movie Quote of the Day Banner -->
+                <section class="quote-box-compact" id="quote-section" aria-label="Movie Quote of the Day">
+                    <div class="quote-compact-inner">
+                        <div class="quote-compact-text">
+                            <span class="quote-compact-tag">Movie Quote of the Day</span>
+                            <p id="quote-text">"May the Force be with you." — <strong id="quote-movie" style="color: var(--accent);">Star Wars (1977)</strong></p>
+                        </div>
+                        <button type="button" id="new-quote-btn" class="btn quote-btn-compact">New Quote</button>
+                    </div>
+                </section>
+
+                <!-- Curated Collection -->
                 <section id="collection">
                     <div class="section-title">
                         <h2>Curated Movie Collection</h2>
                         <span style="font-size: 0.95rem; font-weight: normal; color: var(--text-muted);">21 Featured Masterpieces</span>
-                    </div>
-
-                    <div class="filter-bar">
-                        <span>Filter Genre:</span>
-                        <button type="button" class="filter-btn active" data-genre="all">All</button>
-                        <button type="button" class="filter-btn" data-genre="scifi">Sci-Fi</button>
-                        <button type="button" class="filter-btn" data-genre="action">Action</button>
-                        <button type="button" class="filter-btn" data-genre="drama">Drama</button>
-                        <button type="button" class="filter-btn" data-genre="crime">Crime</button>
-                        <button type="button" class="filter-btn" data-genre="animation">Animation</button>
                     </div>
 
                     <!-- 21 Curated Movies Grid -->
@@ -494,17 +497,7 @@
                     </div>
                 </section>
 
-                <!-- Movie Quote of the Day Section -->
-                <section class="quote-box" id="quote-section">
-                    <h2 class="section-title" style="margin-bottom: 1rem;">Movie Quote of the Day</h2>
-                    <div class="quote-content">
-                        <p id="quote-text">"May the Force be with you." — <strong id="quote-movie" style="color: var(--accent);">Star Wars (1977)</strong></p>
-                    </div>
-                    <div class="button-row">
-                        <button type="button" id="new-quote-btn" class="btn">Get New Quote</button>
-                        <button type="button" class="copy-btn" data-copy-target="#quote-text" title="Copy quote to clipboard">Copy Quote</button>
-                    </div>
-                </section>
+
             </div>
         </main>
 

@@ -435,7 +435,7 @@ window.MovieVerse = window.MovieVerse || {};
     // 9. HOME GENRE FILTER
     // ==========================================
     function initGenreFilter() {
-        const filterBtns = document.querySelectorAll(".filter-bar .filter-btn");
+        const filterBtns = document.querySelectorAll(".filter-btn[data-genre]");
         const cards = document.querySelectorAll("#movie-grid .movie-card");
 
         if (!filterBtns.length || !cards.length) return;

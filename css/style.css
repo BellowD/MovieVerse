@@ -231,7 +231,7 @@ html.light-theme .nav-links a:hover {
     border-left: 1px solid var(--border-color);
 }
 
-/* Explicit high-contrast Sign Up button */
+/* Primary Action & Sign Up Button with Dynamic Accent Reactivity */
 .nav-links a.btn,
 .nav-auth .btn,
 .nav-auth a.btn,
@@ -240,9 +240,9 @@ html.light-theme .nav-links a:hover {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    background-color: #0284c7 !important;
+    background-color: var(--accent) !important;
     color: #ffffff !important;
-    border: 1px solid #0369a1 !important;
+    border: 1px solid var(--accent-hover) !important;
     padding: 8px 18px;
     border-radius: var(--radius-sm);
     font-weight: 700;
@@ -257,8 +257,8 @@ html.light-theme .nav-links a:hover {
 .nav-auth .btn:hover,
 .nav-auth a.btn:hover,
 .btn:hover {
-    background-color: #0369a1 !important;
-    border-color: #38bdf8 !important;
+    background-color: var(--accent-hover) !important;
+    border-color: var(--accent-text) !important;
     color: #ffffff !important;
 }
 
@@ -445,6 +445,41 @@ html.light-theme .nav-links a:hover {
     color: var(--text-primary);
     background-color: var(--bg-card);
     border-color: var(--border-color);
+}
+
+/* Sidebar Genre Filters */
+.sidebar-genre-filters {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.sidebar-genre-filters .filter-btn {
+    width: 100%;
+    text-align: left;
+    padding: 8px 12px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: var(--radius-sm);
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.sidebar-genre-filters .filter-btn:hover {
+    color: var(--text-primary);
+    border-color: var(--accent);
+    background-color: var(--bg-card-hover);
+}
+
+.sidebar-genre-filters .filter-btn.active {
+    background-color: var(--accent) !important;
+    color: #ffffff !important;
+    border-color: var(--accent-hover) !important;
 }
 
 /* Main Container */
@@ -714,7 +749,7 @@ footer {
     border: 1px solid rgba(56, 189, 248, 0.25);
 }
 
-/* Quote Box */
+/* Quote Box (Full & Compact) */
 .quote-box {
     background-color: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -722,6 +757,66 @@ footer {
     border-radius: var(--radius-sm);
     padding: 2rem;
     margin-bottom: 3rem;
+}
+
+/* Compact Movie Quote of the Day Banner */
+.quote-box-compact {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem 1.25rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
+    transition: background-color var(--transition-normal), border-color var(--transition-normal);
+}
+
+.quote-compact-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+}
+
+.quote-compact-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    flex: 1;
+}
+
+.quote-compact-tag {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 800;
+    color: var(--accent-text);
+}
+
+.quote-box-compact #quote-text {
+    font-size: 0.96rem;
+    font-style: italic;
+    color: var(--text-primary);
+    line-height: 1.4;
+    margin: 0;
+}
+
+.quote-btn-compact {
+    padding: 6px 14px !important;
+    font-size: 0.82rem !important;
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+    .quote-compact-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    .quote-btn-compact {
+        align-self: flex-start;
+    }
 }
 
 .quote-content {
@@ -1201,12 +1296,44 @@ footer {
         grid-template-columns: 1fr;
         grid-template-areas:
             "header"
+            "sidebar"
             "main"
             "footer";
     }
     
     .sidebar {
-        display: none;
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        padding: 1rem 1.2rem;
+        gap: 1rem;
+    }
+
+    .sidebar-genre-filters {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .sidebar-genre-filters .filter-btn {
+        width: auto;
+        padding: 6px 12px;
+        font-size: 0.82rem;
+    }
+
+    .sidebar ul {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .sidebar a {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+
+    .sidebar-bottom {
+        margin-top: 0.8rem;
+        padding-top: 0.8rem;
     }
     
     #main-header {
